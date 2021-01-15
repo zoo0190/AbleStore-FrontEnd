@@ -7,7 +7,7 @@
 
 In the project directory, you can run:
 
-## 🍿프로젝트 참가자 (Front & Back)
+## 프로젝트 참가자 (Front & Back)
 
 ### **FrontEnd**
 
