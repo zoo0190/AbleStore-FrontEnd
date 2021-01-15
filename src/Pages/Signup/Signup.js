@@ -18,7 +18,6 @@ function SignUp() {
     user_id: "",
     location: "",
   });
-  console.log(inputs);
   const { 이름, 닉네임, user_id, email, password, location } = inputs;
 
   const handleIdPasswordInput = (e) => {

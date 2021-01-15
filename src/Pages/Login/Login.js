@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import LoginLayout from "../../Components/molecules/LoginLayout";
 
-function SignUp() {
+function Login() {
   return (
     <LoginMain>
       <LoginLayout format={loginProps} />
@@ -10,7 +10,7 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default Login;
 
 const LoginMain = styled.div`
   background: rgba(0, 0, 0, 0.56);

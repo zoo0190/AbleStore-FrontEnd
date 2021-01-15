@@ -10,9 +10,7 @@ const { Option } = Select;
 
 const SignUpLayout = ({ format, goMain, onChange, location }) => {
   const handleChange = (value) => {
-    console.log(`${value}`);
     setInput(value);
-    console.log(location);
   };
 
   const [inputText, setInput] = useState({ value: "" });
@@ -21,9 +19,7 @@ const SignUpLayout = ({ format, goMain, onChange, location }) => {
     onChange({ value: value, name: name });
     setInput({ value: value });
   };
-  const handleClick = () => {
-    console.log("click");
-  };
+  const handleClick = () => {};
   return (
     <SignUpLMain>
       <FormLayout goMain={goMain}>
