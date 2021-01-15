@@ -1,5 +1,34 @@
+import React from "react";
+import styled from "styled-components";
+import HeaderLogo from "../../molecules/HeaderLogo";
+import HeaderMenu from "../../molecules/HeaderMenu";
+import HeaderSignin from "../../molecules/HeaderSignin";
+
 function Header() {
-  return <div></div>;
+  return (
+    <Wrapper>
+      <Nav>
+        <HeaderLogo />
+        <HeaderMenu />
+        <HeaderSignin />
+      </Nav>
+    </Wrapper>
+  );
 }
 
 export default Header;
+
+const Wrapper = styled.div`
+  width: 100%;
+  background-color: #0467e6;
+`;
+
+const Nav = styled.nav`
+  position: relative;
+  display: flex;
+  background-color: #0467e6;
+  height: 84px;
+  min-width: 1030px;
+  max-width: 1280px;
+  margin: 0 auto;
+`;

@@ -1,7 +1,13 @@
 import React from "react";
+import styled from "styled-components";
+import Header from "../../Components/organisms/Header/Header";
 
 function Main() {
-  return <div>this main</div>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 }
 
 export default Main;
