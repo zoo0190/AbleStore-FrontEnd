@@ -1,4 +1,4 @@
-# Synology Community page clone project
+# Synology community page clone project
 
 위코드 부트캠프 15기 기업협업 프로젝트입니다.
 진행기간: 2021년 1월~
