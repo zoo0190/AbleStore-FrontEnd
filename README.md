@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# Synology Community page clone project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+위코드 부트캠프 15기 기업협업 프로젝트입니다.
+진행기간: 2021년 1월~
 
-## Available Scripts
+## 프로젝트 소개
 
 In the project directory, you can run:
 
-### `yarn start`
+## 프로젝트 참가자 (Front & Back)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### **FrontEnd**
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- 김찬영(PM), 최용석, 조아람
 
-### `yarn test`
+### **BackEnd**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 이수한
 
-### `yarn build`
+## **기술 스택**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### **FrontEnd**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- HTML / CSS / JavaScript (ES6) / React (CRA 세팅) / Sass / styled-components / atomic component / Ant-Design
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### **BackEnd**
 
-### `yarn eject`
+- Python / Django / CORS Header / Bcrypt / PyJWT / MySQL / AqeuryTool (데이터베이스 모델링) / AWS(EC2, RDS)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### **협업 도구**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Slack / Git + GitHub / Notion을 이용, 일정관리 및 작업 현황 확인
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+---
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# **레퍼런스**
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- 이 프로젝트는 https://community.synology.com/enu/?_ga=2.222295960.1696591967.1610326607-1915912015.1609750468&_gl=1%2aybfhf7%2a_ga%2aMTkxNTkxMjAxNS4xNjA5NzUwNDY4%2a_ga_9Q8XT3X20D%2aMTYxMDU4NDc5NC40LjAuMTYxMDU4NDc5NC42MA.. 사이트를 참조하여 학습목적으로 만들었습니다.
+- 실무수준의 프로젝트이지만 학습용으로 만들었기 때문에 이 코드를 활용하여 이득을 취하거나 무단 배포할 경우 법적으로 문제될 수 있습니다.
