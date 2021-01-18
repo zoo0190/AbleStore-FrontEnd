@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import HeaderLogo from "../../molecules/HeaderLogo";
-import HeaderMenu from "../../molecules/HeaderMenu";
-import HeaderSignin from "../../molecules/HeaderSignin";
+import HeaderLogo from "../../Molecules/HeaderLogo";
+import HeaderMenu from "../../Molecules/HeaderMenu";
+import HeaderSignin from "../../Molecules/HeaderSignin";
 
 function Header() {
   return (

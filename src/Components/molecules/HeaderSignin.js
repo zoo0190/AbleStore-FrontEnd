@@ -1,5 +1,5 @@
 import React from "react";
-import HeaderButton from "../atoms/HeaderButton";
+import HeaderButton from "../Atoms/HeaderButton";
 
 const HeaderSignin = () => <HeaderButton title="Sign in" />;
 

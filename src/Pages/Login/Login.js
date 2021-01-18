@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import LoginLayout from "../../Components/molecules/LoginLayout";
+import LoginLayout from "../../Components/Molecules/LoginLayout";
 
 function Login() {
   return (

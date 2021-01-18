@@ -3,7 +3,7 @@ import { Input } from "antd";
 import styled from "styled-components";
 import "antd/dist/antd.css";
 
-function InputComp({ type, placeholder, onChange, name }) {
+function InputComp({ type, placeholder, onChange, name, validation }) {
   const [inputText, setInput] = useState({ value: "" });
 
   const pushOnChange = (e) => {
@@ -34,3 +34,5 @@ const InputField = styled(Input)`
   height: 3em;
   font-size: 0.8em;
 `;
+
+const Hi = styled.div``;
