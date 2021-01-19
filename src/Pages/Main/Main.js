@@ -4,6 +4,7 @@ import Categories from "../../Components/Organisms/Categories/Categories";
 import Header from "../../Components/Organisms/Header/Header";
 import MainBanner from "../../Components/Organisms/MainBanner/MainBanner";
 
+
 function Main() {
   return (
     <>
