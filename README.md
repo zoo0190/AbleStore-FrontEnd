@@ -33,7 +33,6 @@ In the project directory, you can run:
 
 ---
 
-# **레퍼런스**
+# **License**
 
-- 이 프로젝트는 https://community.synology.com/enu/?_ga=2.222295960.1696591967.1610326607-1915912015.1609750468&_gl=1%2aybfhf7%2a_ga%2aMTkxNTkxMjAxNS4xNjA5NzUwNDY4%2a_ga_9Q8XT3X20D%2aMTYxMDU4NDc5NC40LjAuMTYxMDU4NDc5NC42MA.. 사이트를 참조하여 학습목적으로 만들었습니다.
-- 실무수준의 프로젝트이지만 학습용으로 만들었기 때문에 이 코드를 활용하여 이득을 취하거나 무단 배포할 경우 법적으로 문제될 수 있습니다.
+GNU
