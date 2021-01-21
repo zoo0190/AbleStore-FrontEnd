@@ -26,3 +26,9 @@ export const COUNTRY = {
     },
   ],
 };
+
+
+
+export const SIGN_UP_API = "http://172.30.1.42:8000/user/signup";
+
+export const LOGIN_API = "http://172.30.1.34:8000/user/signin";

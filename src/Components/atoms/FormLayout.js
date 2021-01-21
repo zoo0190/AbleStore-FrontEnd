@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-const FormLayout = (props) => {
+const FormLayout = ({ goMain, signUp, children }) => {
   return (
     <div className="Form">
       <FormHeader>
-        <div className="logo" onClick={props.goMain} />
-        <div className="logoText">Account</div>
+        <div className="logo" onClick={goMain} />
+        {signUp && <div className="logoText">Account</div>}
       </FormHeader>
-      {props.children}
+      {children}
     </div>
   );
 };
