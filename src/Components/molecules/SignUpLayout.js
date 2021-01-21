@@ -8,65 +8,79 @@ import "antd/dist/antd.css";
 
 const { Option } = Select;
 
-const SignUpLayout = ({ format, goMain, onChange, inputStatus }) => {
+const SignUpLayout = ({
+  format,
+  goMain,
+  onChange,
+  inputStatus,
+  setCheckName,
+  setCheckNickName,
+  setCheckUserId,
+  setCheckEmail,
+  setCheckPassword,
+  setCheckLocation,
+  location,
+  clicked,
+}) => {
+  
   const handleChange = (e) => {
     onChange({ name: "location", value: String(e) });
+    if (clicked) {
+      const locationValid = location.length;
+      setCheckLocation(locationValid ? true : false);
+    }
   };
+
+  var jsxInput = format.data.map((input, idx) => (
+    <InputDivWrap key={idx}>
+      <InputDiv>
+        {input.tag === "input" ? (
+          <>
+            <FieldName>{input.type}</FieldName>
+            <InputComp
+              key={input.id}
+              type={input.type}
+              name={input.name}
+              placeholder={input.text}
+              onChange={onChange}
+              // value={console.log(input.value)}
+              validate={input.validate}
+              setCheckName={setCheckName}
+              setCheckNickName={setCheckNickName}
+              setCheckUserId={setCheckUserId}
+              setCheckEmail={setCheckEmail}
+              setCheckPassword={setCheckPassword}
+              clicked={clicked}
+            />
+          </>
+        ) : (
+          <>
+            <FieldName>{input.type}</FieldName>
+            <Select
+              className="ant-select-selection"
+              name={input.name}
+              defaultValue={input.text}
+              onChange={handleChange}
+              style={{ border: "0px", width: "64.5%", fontSize: "0.8em" }}
+            >
+              {COUNTRY.country.map((el, id) => (
+                <Option key={id} value={el.nation}>
+                  {el.nation}
+                </Option>
+              ))}
+            </Select>
+          </>
+        )}
+      </InputDiv>
+      <InputWarn status={inputStatus.status[idx].statusField.toString()}>{inputStatus.status[idx].message}</InputWarn>
+    </InputDivWrap>
+  ));
+
   return (
     <SignUpLMain>
-      <FormLayout goMain={goMain}>
+      <FormLayout goMain={goMain} signUp="fromSignUp">
         <h2>{format.text}</h2>
-        <div>
-          {format.data.map((input, idx) =>
-            input.tag === "input" ? (
-              <InputDivWrap key={idx}>
-                <InputDiv>
-                  <FieldName>{input.type}</FieldName>
-                  <InputComp
-                    key={input.id}
-                    type={input.type}
-                    name={input.name}
-                    placeholder={input.text}
-                    onChange={onChange}
-                    value={input.value}
-                    validation={input.validation}
-                  />
-                </InputDiv>
-                <InputWarn
-                  key={idx}
-                  status={inputStatus.status[idx].statusField.toString()}
-                >
-                  {inputStatus.status[idx].message}
-                </InputWarn>
-              </InputDivWrap>
-            ) : (
-              <InputDivWrap key={idx}>
-                <InputDiv>
-                  <FieldName>{input.type}</FieldName>
-                  <Select
-                    className="ant-select-selection"
-                    name={input.name}
-                    defaultValue={input.text}
-                    onChange={handleChange}
-                    style={{ border: "0px", width: "64.5%", fontSize: "0.8em" }}
-                  >
-                    {COUNTRY.country.map((el, id) => (
-                      <Option key={id} value={el.nation}>
-                        {el.nation}
-                      </Option>
-                    ))}
-                  </Select>
-                </InputDiv>
-                <InputWarn
-                  key={idx}
-                  status={inputStatus.status[idx].statusField.toString()}
-                >
-                  {inputStatus.status[idx].message}
-                </InputWarn>
-              </InputDivWrap>
-            ),
-          )}
-        </div>
+        <div>{jsxInput}</div>
       </FormLayout>
     </SignUpLMain>
   );
@@ -75,12 +89,13 @@ export default SignUpLayout;
 
 const SignUpLMain = styled.div`
   width: 37em;
-  height: 600px;
+  height: 33em;
   padding: 32px 20px 48px;
   background: white;
   border-radius: 6px;
   h2 {
-    font-weight: 200;
+    font-weight: 100;
+    font-size: 1em;
   }
   p {
     margin-top: 20px;
@@ -92,21 +107,25 @@ const SignUpLMain = styled.div`
     }
   }
 `;
+
 const InputDivWrap = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
 const InputDiv = styled.div`
   display: flex;
   align-items: center;
   margin: 0.1em 0;
 `;
+
 const InputWarn = styled.div`
   padding-left: 20%;
   font-size: 0.1em;
   color: red;
   opacity: ${(props) => (props.status === "false" ? "1" : "0")};
 `;
+
 const FieldName = styled.div`
   text-align: right;
   width: 20%;

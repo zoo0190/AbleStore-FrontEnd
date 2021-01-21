@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import styled from "styled-components";
 import SignUpLayout from "../../Components/Molecules/SignUpLayout";
 import { Button } from "antd";
+import { SIGN_UP_API } from "../../Enum";
 //test123@test.com
 //123123qweqwe
 
@@ -12,7 +13,7 @@ const emailRule = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 function SignUp() {
   const [accountForm] = useState(signUpProps);
   const history = useHistory();
-
+  const [clicked, setClicked] = useState(false);
   const [checkName, setCheckName] = useState(true);
   const [checkNickName, setCheckNickName] = useState(true);
   const [checkUserId, setCheckUserId] = useState(true);
@@ -75,38 +76,14 @@ function SignUp() {
       ...inputs,
       [e.name]: e.value,
     });
-
-    if(e.name === "name"){
-      const nameValid = name.length > 0;
-      setCheckName(nameValid ? true : false);
-    }
-    if(e.name === "nickName"){
-      const nickNameValid = nickName.length > 0;
-      setCheckNickName(nickNameValid ? true : false);
-    }
-    if(e.name === "userId"){
-      const userIdValid = userId.length > 0;
-      setCheckUserId(userIdValid ? true : false);
-    }
-    if(e.name === "email"){
-      const emailValid = email.match(emailRule);
-      setCheckEmail(emailValid ? true : false);
-    }
-    if(e.name === "password"){
-      const pwValid = password.match(pwRule);
-      setCheckPassword(pwValid ? true : false);
-    }
-    if(e.name === "location"){
-      const locationValid = location;
-      setCheckLocation(locationValid ? true : false);
-    }
   };
-
   const checkValidation = () => {
+  
+    setClicked(true);
+
     const nameValid = name.length > 0;
     const nickNameValid = nickName.length > 0;
     const userIdValid = userId.length > 0;
-
     const emailValid = email.match(emailRule);
     const pwValid = password.match(pwRule);
     const locationValid = location;
@@ -118,12 +95,12 @@ function SignUp() {
     setCheckEmail(emailValid ? true : false);
     setCheckPassword(pwValid ? true : false);
     setCheckLocation(locationValid ? true : false);
+  
     inputPass && signInFetch();
   };
-  // console.log(inputs);
 
   const signInFetch = () => {
-    fetch("http://172.30.1.42:8000/user/signup", {
+    fetch(SIGN_UP_API, {
       method: "POST",
       body: JSON.stringify({
         name: name,
@@ -159,11 +136,18 @@ function SignUp() {
         value={setInputs}
         location={location}
         inputStatus={inputStatus}
+        setCheckName={setCheckName}
+        setCheckNickName={setCheckNickName}
+        setCheckUserId={setCheckUserId}
+        setCheckEmail={setCheckEmail}
+        setCheckPassword={setCheckPassword}
+        setCheckLocation={setCheckLocation}
+        clicked={clicked}
       />
       <ButtonDiv>
-        <Button type="primary" onClick={checkValidation}>
+        <SignUpBtn type="primary" onClick={checkValidation}>
           회원가입
-        </Button>
+        </SignUpBtn>
       </ButtonDiv>
     </SignUpMain>
   );
@@ -172,6 +156,7 @@ function SignUp() {
 export default SignUp;
 
 const SignUpMain = styled.div`
+  position: relative;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -213,11 +198,12 @@ const SignUpMain = styled.div`
 
 const ButtonDiv = styled.div`
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  width: 70%;
+  position: absolute;
+  bottom: 10%;
 `;
-
+const SignUpBtn = styled(Button)`
+  width: 15em;
+`;
 const signUpProps = {
   type: "signUp",
   text: "계정 만들기",
