@@ -1,67 +1,85 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import FormLayout from "../Atoms/FormLayout";
 import InputComp from "../Atoms/Input";
-import { Select, Button } from "antd";
-import { COUNTRY } from "../../../src/config";
+import { Select } from "antd";
+import { COUNTRY } from "../../../src/Enum";
 import "antd/dist/antd.css";
 
 const { Option } = Select;
 
-const SignUpLayout = ({ format, goMain, onChange, location }) => {
-  const handleChange = (value) => {
-    setInput(value);
+const SignUpLayout = ({
+  format,
+  goMain,
+  onChange,
+  inputStatus,
+  setCheckName,
+  setCheckNickName,
+  setCheckUserId,
+  setCheckEmail,
+  setCheckPassword,
+  setCheckLocation,
+  location,
+  clicked,
+}) => {
+  const handleChange = (e) => {
+    onChange({ name: "location", value: String(e) });
+    if (clicked) {
+      const locationValid = location.length;
+      setCheckLocation(locationValid ? true : false);
+    }
   };
 
-  const [inputText, setInput] = useState({ value: "" });
-  const pushLocation = (e) => {
-    const { value, name } = e.target;
-    onChange({ value: value, name: name });
-    setInput({ value: value });
-  };
-  const handleClick = () => {};
+  var jsxInput = format.data.map((input, idx) => (
+    <InputDivWrap key={idx}>
+      <InputDiv>
+        {input.tag === "input" ? (
+          <>
+            <FieldName>{input.type}</FieldName>
+            <InputComp
+              key={input.id}
+              type={input.type}
+              name={input.name}
+              placeholder={input.text}
+              onChange={onChange}
+              // value={console.log(input.value)}
+              validate={input.validate}
+              setCheckName={setCheckName}
+              setCheckNickName={setCheckNickName}
+              setCheckUserId={setCheckUserId}
+              setCheckEmail={setCheckEmail}
+              setCheckPassword={setCheckPassword}
+              clicked={clicked}
+            />
+          </>
+        ) : (
+          <>
+            <FieldName>{input.type}</FieldName>
+            <Select
+              className="ant-select-selection"
+              name={input.name}
+              defaultValue={input.text}
+              onChange={handleChange}
+              style={{ border: "0px", width: "64.5%", fontSize: "0.8em" }}
+            >
+              {COUNTRY.country.map((el, id) => (
+                <Option key={id} value={el.nation}>
+                  {el.nation}
+                </Option>
+              ))}
+            </Select>
+          </>
+        )}
+      </InputDiv>
+      <InputWarn status={inputStatus.status[idx].statusField.toString()}>{inputStatus.status[idx].message}</InputWarn>
+    </InputDivWrap>
+  ));
+
   return (
     <SignUpLMain>
-      <FormLayout goMain={goMain}>
+      <FormLayout goMain={goMain} signUp="fromSignUp">
         <h2>{format.text}</h2>
-        <div>
-          {format.data.map((input, idx) =>
-            input.tag === "input" ? (
-              <InputDiv key={idx}>
-                <FieldName>{input.field}</FieldName>
-                <InputComp
-                  key={input.id}
-                  type={input.type}
-                  name={input.name}
-                  placeholder={input.text}
-                  onChange={onChange}
-                  value={input.value}
-                />
-              </InputDiv>
-            ) : (
-              <InputDiv key={idx}>
-                <FieldName>{input.field}</FieldName>
-                <Select
-                  className="ant-select-selection"
-                  name={input.name}
-                  defaultValue={input.text}
-                  style={{ border: "0px", width: "64.5%", fontSize: "0.8em" }}
-                >
-                  {COUNTRY.country.map((el, id) => (
-                    <Option key={id} value={el.nation}>
-                      {el.nation}
-                    </Option>
-                  ))}
-                </Select>
-              </InputDiv>
-            ),
-          )}
-        </div>
-        <ButtonDiv>
-          <Button type="primary" onClick={handleClick}>
-            회원가입
-          </Button>
-        </ButtonDiv>
+        <div>{jsxInput}</div>
       </FormLayout>
     </SignUpLMain>
   );
@@ -70,12 +88,13 @@ export default SignUpLayout;
 
 const SignUpLMain = styled.div`
   width: 37em;
-  height: 600px;
+  height: 33em;
   padding: 32px 20px 48px;
   background: white;
   border-radius: 6px;
   h2 {
-    font-weight: 200;
+    font-weight: 100;
+    font-size: 1em;
   }
   p {
     margin-top: 20px;
@@ -88,10 +107,22 @@ const SignUpLMain = styled.div`
   }
 `;
 
+const InputDivWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const InputDiv = styled.div`
   display: flex;
   align-items: center;
-  margin: 1em 0;
+  margin: 0.1em 0;
+`;
+
+const InputWarn = styled.div`
+  padding-left: 20%;
+  font-size: 0.1em;
+  color: red;
+  opacity: ${(props) => (props.status === "false" ? "1" : "0")};
 `;
 
 const FieldName = styled.div`
@@ -99,20 +130,4 @@ const FieldName = styled.div`
   width: 20%;
   font-size: 0.1em;
   padding-right: 5em;
-`;
-
-const InputSelect = styled.div`
-  .ant-select-selection {
-    color: red;
-    border: 0px;
-    width: 50%;
-    height: 3em;
-    font-size: 0.8em;
-  }
-`;
-
-const ButtonDiv = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
 `;
