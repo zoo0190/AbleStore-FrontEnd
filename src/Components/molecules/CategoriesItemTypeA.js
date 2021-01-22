@@ -2,12 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import ItemTypeA from "../Atoms/ItemTypeA";
 
-const CategoriesItemTypeA = () => (
+const CategoriesItemTypeA = ({ categoriesInfo }) => (
   <Wrapping>
-    <ItemTypeA />
-    <ItemTypeA />
-    <ItemTypeA />
-    <ItemTypeA />
+    {categoriesInfo.map((item) => (
+      <ItemTypeA key={item.id} item={item} />
+    ))}
   </Wrapping>
 );
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import FormLayout from "../atoms/FormLayout";
-import InputComp from "../atoms/Input";
+import FormLayout from "../Atoms/FormLayout";
+import InputComp from "../Atoms/Input";
 import { Select, Button } from "antd";
 import { COUNTRY } from "../../../src/config";
 import "antd/dist/antd.css";

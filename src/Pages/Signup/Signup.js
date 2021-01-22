@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
-import SignUpLayout from "../../Components/molecules/SignUpLayout";
+import SignUpLayout from "../../Components/Molecules/SignUpLayout";
 
 function SignUp() {
   const [accountForm] = useState(signUpProps);

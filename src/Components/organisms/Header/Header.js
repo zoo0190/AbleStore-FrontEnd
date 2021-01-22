@@ -18,7 +18,7 @@ function Header() {
 
 export default Header;
 
-const Wrapper = styled.div`
+const Wrapper = styled.header`
   width: 100%;
   background-color: #0467e6;
 `;

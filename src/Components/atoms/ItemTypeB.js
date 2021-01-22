@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-const ItemTypeB = () => (
+const ItemTypeB = ({ item }) => (
   <Wrapping>
     <Container>
-      <ItemTitle>Legacy Forums</ItemTitle>
+      <ItemImg src={item.imgSrc}></ItemImg>
+      <ItemTitle>{item.title}</ItemTitle>
     </Container>
   </Wrapping>
 );
@@ -31,7 +32,10 @@ const Container = styled.a`
   background-color: #eef3f7;
 `;
 
+const ItemImg = styled.img`
+  margin-right: 4px;
+`;
+
 const ItemTitle = styled.div`
-  margin-top: 12px;
   color: black;
 `;

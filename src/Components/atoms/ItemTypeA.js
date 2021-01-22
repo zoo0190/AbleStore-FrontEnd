@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-const ItemTypeA = () => (
+const ItemTypeA = ({ item }) => (
   <Wrapping>
     <Container>
-      <ItemImg src="https://community.synology.com/front/img/board/1.png"></ItemImg>
-      <ItemTitle>NAS</ItemTitle>
+      <ItemImg src={item.imgSrc}></ItemImg>
+      <ItemTitle>{item.title}</ItemTitle>
     </Container>
   </Wrapping>
 );

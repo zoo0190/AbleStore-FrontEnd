@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import FormLayout from "../atoms/FormLayout";
+import FormLayout from "../Atoms/FormLayout";
 import styled from "styled-components";
 import { Input, Button } from "antd";
 
