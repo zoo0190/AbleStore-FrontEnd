@@ -104,6 +104,7 @@ const LoginMain = styled.div`
       height: 70px;
       background: url("https://account.synology.com/img/logo/logo_gray.svg");
       background-size: 100% 100%;
+      cursor: pointer;
     }
   }
 

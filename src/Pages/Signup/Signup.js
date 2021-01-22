@@ -78,7 +78,6 @@ function SignUp() {
     });
   };
   const checkValidation = () => {
-  
     setClicked(true);
 
     const nameValid = name.length > 0;
@@ -95,7 +94,7 @@ function SignUp() {
     setCheckEmail(emailValid ? true : false);
     setCheckPassword(pwValid ? true : false);
     setCheckLocation(locationValid ? true : false);
-  
+
     inputPass && signInFetch();
   };
 
@@ -157,7 +156,7 @@ export default SignUp;
 
 const SignUpMain = styled.div`
   position: relative;
-  height: 100vh;
+  height: 85vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -198,11 +197,10 @@ const SignUpMain = styled.div`
 
 const ButtonDiv = styled.div`
   display: flex;
-  position: absolute;
   bottom: 10%;
 `;
 const SignUpBtn = styled(Button)`
-  width: 15em;
+  width: 11em;
 `;
 const signUpProps = {
   type: "signUp",

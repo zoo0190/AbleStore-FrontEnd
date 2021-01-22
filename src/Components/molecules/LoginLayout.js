@@ -34,7 +34,7 @@ const LoginLayout = ({
   };
   return (
     <LoginLMain>
-      <FormLayout>
+      <FormLayout goMain={goMain}>
         <h2>{format.text}</h2>
         <InputButtonWrapper>
           <SetCenterWrapper>
