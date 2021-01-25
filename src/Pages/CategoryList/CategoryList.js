@@ -1,3 +1,4 @@
+
 import React from "react";
 import HeaderNav from "../../Components/Organisms/Header/Header";
 import CategoryListLayout from "../../Components/Organisms/CategoryListLayout/CategoryListLayout";
@@ -24,3 +25,4 @@ const CategoryListMain = styled.div`
   /* margin: 0.5em 0.5em; */
   padding: 1em 1em;
 `;
+
