@@ -1,8 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Form, Input, Button, Select, Tag } from "antd";
+import { Form, Input, Button, Select, Tag, Alert } from "antd";
 import "antd/dist/antd.css";
 import CategoryBoard from "./CategoryBoard";
 import axios from "axios";
+
+const Token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.NwpC8Kujp2xApfX0n-OLf34ouXyZjAU0b3bBoH86itY";
+const API = "http://172.30.1.51:8000/community/categories/1/boards";
 
 const { Option } = Select;
 const layout = {
@@ -29,70 +32,73 @@ function CategoryForm() {
     fetch("http://localhost:3000/data/postData.json")
       .then((res) => res.json())
       .then((res) => {
-        const newTag = res.data.filter((e) => e.title === "Tags");
-        setTagData(newTag[0].text);
-        const newTopic = res.data.filter((e) => e.title === "TOPIC");
-        setTopicData(newTopic[0].text);
+        const { topic, tags } = res.data;
+        setTagData(tags.items);
+        setTopicData(topic.items);
+        console.log(res.data);
       });
   }, []);
 
-  const formRef = useRef();
-
   const onFinish = (values) => {
-    const newData = { ...values, Tags: values.Tags.join(","), content: inputData.value };
+    const newData = inputData.indexOf("</p>");
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization: Token,
+      },
+      body: JSON.stringify({
+        Topic: values.Topic,
+        Title: values.Title,
+        Content: inputData.substring(3, newData),
+        Image: "",
+        Tags: values.Tags.join(","),
+      }),
+    };
+    fetch(API, requestOptions)
+      .then((res) => res.json())
+      .then((res) => console.log(res, "res"));
   };
-  const onReset = () => {
-    formRef.current.resetFields();
-  };
+
   const onBack = () => {};
 
+  const options = [
+    {
+      required: true,
+    },
+  ];
+
+  const formWrapper = (text, child) => (
+    <Form.Item name={text} label={text} rules={options}>
+      {child}
+    </Form.Item>
+  );
+
   return (
-    <Form size={"large"} {...layout} ref={formRef} name="control-ref" onFinish={onFinish}>
-      <Form.Item
-        name="Topic"
-        label="Topic"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
+    <Form size={"large"} {...layout} name="control-ref" onFinish={onFinish}>
+      {formWrapper(
+        "Topic",
         <Select placeholder="Select a Type">
           {topicData.map((e) => (
             <Option key={e.id} value={e.text}>
               <Tag>{e.text}</Tag>
             </Option>
           ))}
-        </Select>
-      </Form.Item>
-      <Form.Item
-        name="Title"
-        label="Title"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        name="Tags"
-        label="Tags"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
+        </Select>,
+      )}
+
+      {/* </Form.Item> */}
+      {formWrapper("Title", <Input />)}
+
+      {formWrapper(
+        "Tags",
         <Select mode="multiple" showArrow>
           {tagData.map((e) => (
             <Option key={e.id} value={e.text}>
               <Tag>{e.text}</Tag>
             </Option>
           ))}
-        </Select>
-      </Form.Item>
+        </Select>,
+      )}
 
       <Form.Item name="Content" label="Content">
         <CategoryBoard setInputData={setInputData} />
@@ -102,9 +108,7 @@ function CategoryForm() {
         <Button htmlType="button" onClick={onBack}>
           Back
         </Button>
-        <Button htmlType="button" onClick={onReset}>
-          Reset
-        </Button>
+
         <Button type="primary" htmlType="submit">
           Submit
         </Button>

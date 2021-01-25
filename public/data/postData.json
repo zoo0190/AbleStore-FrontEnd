@@ -1,22 +1,24 @@
 {
-  "data": [
-    {
-      "id": 0,
-      "title": "TOPIC",
-      "text": [
+  "data": {
+    "topic": {
+      "info": {
+        "id": 0,
+        "displayName": "Topic"
+      },
+      "items": [
         { "id": 1, "text": "Question" },
         { "id": 2, "text": "Discussion" }
       ]
     },
-    {
+    "title": {
       "id": 1,
       "title": "Title",
       "text": ""
     },
-    {
+    "tags": {
       "id": 2,
       "title": "Tags",
-      "text": [
+      "items": [
         { "id": "1", "text": "Dsm mANAGEMENT" },
         { "id": "2", "text": "Storage Management" },
         { "id": "3", "text": "File Services" },
@@ -24,5 +26,5 @@
         { "id": "5", "text": "VMM Pro & Virtual DSM" }
       ]
     }
-  ]
+  }
 }
