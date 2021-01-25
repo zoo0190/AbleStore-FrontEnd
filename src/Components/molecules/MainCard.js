@@ -1,57 +1,66 @@
 import React from "react";
 import styled from "styled-components";
 import CardButton from "../Atoms/CardButton";
+import moment from "moment";
 import "antd/dist/antd.css";
 import { Avatar } from "antd";
 
 const questionImgPath = "https://community.synology.com/front/img/question.png";
 const solvedImgPath = "https://community.synology.com/front/img/solved1.png";
 
-const MainCard = ({ item }) => {
+const MainCard = ({ item, goToDetail, goToTags, goToProfile }) => {
+  const handleClickDetail = () => {
+    goToDetail(item);
+  };
+
+  const handleClickProfile = () => {
+    goToProfile(item);
+  };
+
   return (
     <Container>
       <IconWrapper>
         {(() => {
-          if (item.topic === "discussion") {
+          if (item.topic === "Discussion") {
             return <Icon imgUrl=""></Icon>;
           }
-          if (item.topic === "question" && item.solution === true) {
+          if (item.topic === "Question" && item.solution === true) {
             return <Icon imgUrl={solvedImgPath}></Icon>;
           }
-          if (item.topic === "question" && item.solution === false) {
+          if (item.topic === "Question" && item.solution === false) {
             return <Icon imgUrl={questionImgPath}></Icon>;
           }
         })()}
         <Icon></Icon>
       </IconWrapper>
       <CardContentsWrapper>
-        <Title>{item.title}</Title>
-        <Description>{item.content}</Description>
+        <Title onClick={handleClickDetail}>{item.title}</Title>
+        <Description>{item.coment_last.nickname ? item.coment_last.content : item.content}</Description>
         <Info>
           <Category>{item.category}</Category>
           {item.tags.map((tag, idx) => (
-            <CardButton key={idx} tag={tag} />
+            <CardButton goToTags={goToTags} key={idx} tag={tag} />
           ))}
           <CommonStyleWrapper style={{ marginLeft: "12px" }}>
-            <Writer>By {item.writer}</Writer>
+            <Writer>By {item.user_nickname}</Writer>
           </CommonStyleWrapper>
           <CommonStyleWrapper>
-            {item.views} <ThinStyle>Views</ThinStyle>
+            {item.hit} <ThinStyle>Views</ThinStyle>
           </CommonStyleWrapper>
           <CommonStyleWrapper>
-            {item.replies} <ThinStyle>Replies</ThinStyle>
+            {item.comment_number} <ThinStyle>Replies</ThinStyle>
           </CommonStyleWrapper>
           <CommonStyleWrapper>
-            {item.likes} <ThinStyle>Likes</ThinStyle>
+            {item.like} <ThinStyle>Likes</ThinStyle>
           </CommonStyleWrapper>
         </Info>
       </CardContentsWrapper>
-      <Time>8 minutes ago</Time>
-      <AvatarWrapping>
+      <Time>{moment(`${item.created_at}`).fromNow()}</Time>
+      <AvatarWrapping onClick={handleClickProfile}>
         <Avatar size={40} style={{ marginRight: "40px", margin: "0 auto" }}>
-          U
+          {item.coment_last.nickname ? item.coment_last.nickname[0] : item.user_nickname[0]}
         </Avatar>
-        <UserName>Una</UserName>
+        <UserName>{item.coment_last.nickname ? item.coment_last.nickname : item.user_nickname}</UserName>
       </AvatarWrapping>
     </Container>
   );

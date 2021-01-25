@@ -1,9 +1,10 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import SectionTitle from "../../Atoms/SectionTitle";
-import CategoriesItemTypeA from "../../Molecules/CategoriesItemTypeA";
-import CategoriesItemTypeB from "../../Molecules/CategoriesItemTypeB";
+import CategoriesItemInfo from "../../Molecules/CategoriesItemInfo";
+import CategoriesItemInfoSub from "../../Molecules/CategoriesItemInfoSub";
 
-const CATEGORIES_INFO_A = [
+const CATEGORIES_INFO = [
   {
     id: 1,
     title: "NAS",
@@ -26,25 +27,33 @@ const CATEGORIES_INFO_A = [
   },
 ];
 
-const CATEGORIES_INFO_B = [
+const CATEGORIES_INFO_SUB = [
   {
-    id: 5,
+    id: 17,
     title: "Legacy Forums",
     imgSrc: null,
   },
   {
-    id: 6,
+    id: 18,
     title: "Announcement",
     imgSrc: "https://community.synology.com/front/img/announcement.png",
   },
 ];
 
-const Categories = () => (
-  <>
-    <SectionTitle />
-    <CategoriesItemTypeA categoriesInfo={CATEGORIES_INFO_A} />
-    <CategoriesItemTypeB categoriesInfo={CATEGORIES_INFO_B} />
-  </>
-);
+const Categories = () => {
+  const history = useHistory();
+
+  const goToCategory = (e) => {
+    history.push(`/forum/${e}`);
+  };
+
+  return (
+    <>
+      <SectionTitle />
+      <CategoriesItemInfo goToCategory={goToCategory} categoriesInfo={CATEGORIES_INFO} />
+      <CategoriesItemInfoSub goToCategory={goToCategory} categoriesInfo={CATEGORIES_INFO_SUB} />
+    </>
+  );
+};
 
 export default Categories;

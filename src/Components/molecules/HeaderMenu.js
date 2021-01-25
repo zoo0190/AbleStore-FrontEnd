@@ -3,6 +3,7 @@ import HeaderButton from "../Atoms/HeaderButton";
 import { Menu, Dropdown } from "antd";
 import "antd/dist/antd.css";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const CATEOGRY = [
   {
@@ -53,7 +54,7 @@ const HeaderMenu = () => {
               maxWidth: "25%",
             }}
           >
-            <a href="#">{item.title}</a>
+            <Link to={`/enu/forum/${item.id}`}>{item.title}</Link>
           </Menu.Item>
         );
       })}

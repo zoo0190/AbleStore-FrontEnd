@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useHistory } from "react-router";
 import LoginLayout from "../../Components/Molecules/LoginLayout";
 import styled from "styled-components";
-import LoginLayout from "../../Components/Molecules/LoginLayout";
 import { LOGIN_API } from "../../Enum";
 
 const pwRule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;

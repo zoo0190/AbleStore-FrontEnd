@@ -1,16 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 
-const ItemTypeA = ({ item }) => (
-  <Wrapping>
-    <Container>
-      <ItemImg src={item.imgSrc}></ItemImg>
-      <ItemTitle>{item.title}</ItemTitle>
-    </Container>
-  </Wrapping>
-);
+const CategoryButton = ({ item, goToCategory }) => {
+  const handleClick = () => {
+    goToCategory(item.id);
+  };
 
-export default ItemTypeA;
+  return (
+    <Wrapping onClick={handleClick}>
+      <Container>
+        <ItemImg src={item.imgSrc}></ItemImg>
+        <ItemTitle>{item.title}</ItemTitle>
+      </Container>
+    </Wrapping>
+  );
+};
+
+export default CategoryButton;
 
 const Wrapping = styled.div`
   flex: 0 0 25%;

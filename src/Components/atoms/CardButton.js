@@ -1,7 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-const CardButton = ({ tag }) => <Button>{tag}</Button>;
+const CardButton = ({ tag, goToTags }) => {
+  const handleClickTags = () => {
+    goToTags(tag);
+  };
+
+  return <Button onClick={handleClickTags}>{tag.name}</Button>;
+};
 
 export default CardButton;
 
