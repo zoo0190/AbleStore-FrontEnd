@@ -2,7 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Main from "./Pages/Main/Main";
 import Login from "./Pages/Login/Login";
-import SignUp from "./Pages/SignUp/SignUp";
+import SignUp from "./Pages/SignUp/Signup.js";
+import CategoryList from "./Pages/CategoryList/CategoryList"
 
 import Footer from "./Components/Organisms/Footer/Footer";
 class Routes extends React.Component {
@@ -13,6 +14,7 @@ class Routes extends React.Component {
           <Route exact path="/" component={Main} />
           <Route exact path="/Login" component={Login} />
           <Route exact path="/SignUp" component={SignUp} />
+          <Route exact path="/forum" component={CategoryList} />
         </Switch>
         <Footer />
       </Router>

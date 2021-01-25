@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FormLayout from "../Atoms/FormLayout";
+import { useHistory } from "react-router";
 import styled from "styled-components";
 import { Input, Button } from "antd";
 
@@ -18,6 +19,7 @@ const LoginLayout = ({
   checkPassword,
 }) => {
   const [inputText, setInput] = useState({ value: "" });
+  const history = useHistory();
 
   const pushOnChange = (e) => {
     const { value, name } = e.target;
@@ -32,9 +34,12 @@ const LoginLayout = ({
       setCheckPassword(pwValid ? true : false);
     }
   };
+  const goToSignUp = () => {
+    history.push("/signup");
+  }
   return (
     <LoginLMain>
-      <FormLayout>
+      <FormLayout goMain={goMain}>
         <h2>{format.text}</h2>
         <InputButtonWrapper>
           <SetCenterWrapper>
@@ -61,6 +66,7 @@ const LoginLayout = ({
             </LoginButton>
           </SetCenterWrapper>
         </InputButtonWrapper>
+        <SignUpText onClick={goToSignUp}>Synology 계정 만들기</SignUpText>
       </FormLayout>
     </LoginLMain>
   );
@@ -128,4 +134,11 @@ const InputWarn = styled.div`
   color: red;
   padding: 1% 0;
   opacity: ${(props) => (props.status === false ? "1" : "0")};
+`;
+
+const SignUpText = styled.div`
+  margin: 2.5em 4em;
+  font-size: 0.8em;
+  color: #0f7afe;
+  cursor: pointer;
 `;
