@@ -6,8 +6,7 @@ const CatListCard = ({ cardData }) => {
   const moment = require('moment');
   const history = useHistory();
   const postClick = () => {
-    // history.push("");
-    // console.log("post clicked");
+    history.push(`/boardDetail/:${cardData.category_id}/:${cardData.board_id}`);
   };
   return (
     <CatListCardWrapper onClick={postClick}>
