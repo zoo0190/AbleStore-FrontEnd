@@ -1,27 +1,14 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router";
+import React from "react";
 import HeaderNav from "../../Components/Organisms/Header/Header";
-import { Layout, Button } from "antd";
-
+import CategoryListLayout from "../../Components/Organisms/CategoryListLayout/CategoryListLayout";
 import styled from "styled-components";
-
-const { Header, Footer, Content } = Layout;
 
 function CategoryList() {
   return (
     <>
       <HeaderNav />
       <CategoryListMain>
-        <Layout>
-          <Header style={{ background: "green"}}>
-            Title
-            <Button> create post </Button>
-            </Header>
-          <Content>DropDownSection</Content>
-          <Content>Container Section</Content>
-          <Content>Card Collection Section</Content>
-          <Footer>Footer</Footer>
-        </Layout>
+        <CategoryListLayout />
       </CategoryListMain>
     </>
   );
@@ -30,5 +17,10 @@ function CategoryList() {
 export default CategoryList;
 
 const CategoryListMain = styled.div`
-  border: 1px solid black;
+  max-width: 1280px;
+  min-width: 1030px;
+  margin: 0 auto;
+  height: 100%;
+  /* margin: 0.5em 0.5em; */
+  padding: 1em 1em;
 `;
