@@ -6,7 +6,8 @@ import { Button } from "antd";
 import { SIGN_UP_API } from "../../Enum";
 //test123@test.com
 //123123qweqwe
-
+//test333@test.com
+//333333qqq
 const pwRule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 const emailRule = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 

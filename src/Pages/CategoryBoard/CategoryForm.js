@@ -4,6 +4,7 @@ import "antd/dist/antd.css";
 import CategoryBoard from "./CategoryBoard";
 import axios from "axios";
 import { BOARD_USER_API } from "../../Enum";
+import { useHistory } from "react-router-dom";
 
 const Token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.NwpC8Kujp2xApfX0n-OLf34ouXyZjAU0b3bBoH86itY";
 const API = `${BOARD_USER_API}/community/categories/1/boards`;
@@ -28,7 +29,7 @@ function CategoryForm() {
   const [tagData, setTagData] = useState([]);
   const [topicData, setTopicData] = useState([]);
   const [inputData, setInputData] = useState("");
-
+  const history = useHistory();
   useEffect(() => {
     fetch("http://localhost:3000/data/postData.json")
       .then((res) => res.json())
@@ -61,7 +62,9 @@ function CategoryForm() {
       .then((res) => console.log(res, "res"));
   };
 
-  const onBack = () => {};
+  const onBack = () => {
+    history.push("/forum/1");
+  };
 
   const options = [
     {

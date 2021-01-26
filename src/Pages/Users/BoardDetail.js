@@ -30,13 +30,6 @@ function BoardDetail() {
       });
   };
 
-<<<<<<< HEAD
-  const getUserCommentData = async () => {
-    const result = await axios.get(`http://172.30.1.48:8000/community/boards/${categoryid}/comments`);
-    console.log(result);
-    // console.log(commentUserData.concat(result.data.CONTEXT));
-    setCommentUserData(userData.concat(result.data.CONTEXT));
-=======
   const getUserView = async () => {
     const result = await axios
       .get(`${BOARD_USER_API}/community/categories/${categoryId}/boards/${boardId}/hits`)
@@ -52,17 +45,11 @@ function BoardDetail() {
   const getUserCommentData = async () => {
     const result = await axios.get(`http://172.30.1.48:8000/community/boards/${boardId}/comments`);
     setCommentUserData(commentUserData?.concat(result.data.CONTEXT));
->>>>>>> 678fe3da1848421124112a58ad09b942691f79ca
   };
 
   useEffect(() => {
-<<<<<<< HEAD
-    getUserData();
-    getUserCommentData();
-=======
     getUserView();
   }, []);
->>>>>>> 678fe3da1848421124112a58ad09b942691f79ca
 
   useEffect(() => {
     getUserData();
@@ -77,12 +64,6 @@ function BoardDetail() {
   }, [refreshComment]);
 
   return (
-<<<<<<< HEAD
-    <DetailContainer>
-      <View userData={userData} setUserData={setUserData} commentUserData={commentUserData} />
-      {/* <CommentView categoryId={categoryId} setRfresh={setRfresh} postId={postId} commentUserData={commentUserData} /> */}
-    </DetailContainer>
-=======
     <>
       <HeaderNav />
 
@@ -104,7 +85,6 @@ function BoardDetail() {
         />
       </DetailContainer>
     </>
->>>>>>> 678fe3da1848421124112a58ad09b942691f79ca
   );
 }
 
