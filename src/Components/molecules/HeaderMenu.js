@@ -3,19 +3,61 @@ import HeaderButton from "../Atoms/HeaderButton";
 import { Menu, Dropdown } from "antd";
 import "antd/dist/antd.css";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
+const CATEOGRY = [
+  {
+    id: 1,
+    title: "NAS",
+  },
+  {
+    id: 2,
+    title: "Router",
+  },
+  {
+    id: 3,
+    title: "Surveillance",
+  },
+  {
+    id: 4,
+    title: "C2",
+  },
+  {
+    id: 17,
+    title: "Legacy Forums",
+  },
+  {
+    id: 18,
+    title: "Announcement",
+  },
+];
 
 const HeaderMenu = () => {
   const menu = (
-    <Menu>
-      <Menu.Item>
-        <a href="#">123</a>
-      </Menu.Item>
-      <Menu.Item>
-        <a href="#">456</a>
-      </Menu.Item>
-      <Menu.Item>
-        <a href="#">789</a>
-      </Menu.Item>
+    <Menu
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        width: "850px",
+        height: "180px",
+        border: "1px solid #d6dfe6",
+        padding: "36px",
+      }}
+    >
+      {CATEOGRY.map((item) => {
+        return (
+          <Menu.Item
+            key={item.id}
+            style={{
+              flex: "0 0 25%",
+              maxHeight: "35%",
+              maxWidth: "25%",
+            }}
+          >
+            <Link to={`/enu/forum/${item.id}`}>{item.title}</Link>
+          </Menu.Item>
+        );
+      })}
     </Menu>
   );
 

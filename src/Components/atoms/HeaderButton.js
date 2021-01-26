@@ -1,9 +1,16 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 const HeaderButton = ({ title }) => {
+  const history = useHistory();
+
+  const goToSignin = () => {
+    history.push("/Login");
+  };
+
   return title === "Sign in" ? (
-    <SigninButton>{title}</SigninButton>
+    <SigninButton onClick={goToSignin}>{title}</SigninButton>
   ) : (
     <BlogAndSupportButton>{title}</BlogAndSupportButton>
   );
