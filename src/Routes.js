@@ -22,7 +22,7 @@ class Routes extends React.Component {
           <Route exact path="/user/edit/:categoryId/:boardId" component={EditUser} />
           <Route exact path="/Signup" component={Signup} />
           <Route exact path="/forum/1" component={CategoryList} />
-          <Route exact path="/MyPage" component={MyPage} />
+          <Route exact path="/user/:avatarId/profile/topic" component={MyPage} />
         </Switch>
         <Footer />
       </Router>

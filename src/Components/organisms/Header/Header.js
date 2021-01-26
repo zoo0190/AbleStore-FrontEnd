@@ -9,6 +9,7 @@ import { Link, useHistory } from "react-router-dom";
 
 function Header() {
   const history = useHistory();
+  const userId = sessionStorage.getItem("USER_ID");
 
   const menu = (
     <Menu style={{ minHeight: "100px", width: "234px", padding: "0 20px" }}>
@@ -19,7 +20,7 @@ function Header() {
         <strong>{sessionStorage.getItem("USER_NICKNAME")}</strong>
       </Menu.Item>
       <Menu.Item key="1">
-        <Link to="/MyPage">Profile</Link>
+        <Link to={`/user/${userId}/profile/topic`}>Profile</Link>
       </Menu.Item>
       <Menu.Item key="2">
         <Link to="/setting/profile">Settings</Link>
@@ -32,6 +33,7 @@ function Header() {
           onClick={() => {
             sessionStorage.removeItem("ACCESS_TOKEN");
             sessionStorage.removeItem("USER_NICKNAME");
+            sessionStorage.removeItem("USER_ID");
             history.push("/");
           }}
           type="primary"
