@@ -6,9 +6,7 @@ import axios from "axios";
 import { BOARD_USER_API } from "../../Enum";
 import { useHistory } from "react-router-dom";
 
-const Token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.NwpC8Kujp2xApfX0n-OLf34ouXyZjAU0b3bBoH86itY";
 const API = `${BOARD_USER_API}/community/categories/1/boards`;
-
 const { Option } = Select;
 const layout = {
   labelCol: {
@@ -24,8 +22,10 @@ const tailLayout = {
     span: 7,
   },
 };
-
+// console.log(TOKEN);
 function CategoryForm() {
+  const TOKEN = sessionStorage.getItem("ACCESS_TOKEN")
+
   const [tagData, setTagData] = useState([]);
   const [topicData, setTopicData] = useState([]);
   const [inputData, setInputData] = useState("");
@@ -47,7 +47,7 @@ function CategoryForm() {
     const requestOptions = {
       method: "POST",
       headers: {
-        Authorization: Token,
+        Authorization: TOKEN,
       },
       body: JSON.stringify({
         Topic: values.Topic,
@@ -59,7 +59,11 @@ function CategoryForm() {
     };
     fetch(API, requestOptions)
       .then((res) => res.json())
-      .then((res) => console.log(res, "res"));
+      .then((res) => {
+        if (res) {
+          history.push("/forum/1");
+        }
+      });
   };
 
   const onBack = () => {

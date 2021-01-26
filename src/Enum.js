@@ -34,3 +34,5 @@ export const LOGIN_API = "http://172.30.1.48:8000/user/signin";
 export const BOARD_USER_API = "http://172.30.1.48:8000";
 
 export const LIKE_API = "http://172.30.1.48:8000";
+
+// export const TOKEN = sessionStorage.getItem("ACCESS_TOKEN")

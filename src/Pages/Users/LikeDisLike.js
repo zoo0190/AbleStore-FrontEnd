@@ -3,13 +3,15 @@ import { Tooltip } from "antd";
 import { LikeOutlined } from "@ant-design/icons";
 import { LIKE_API } from "../../Enum";
 
+
 function LikeDisLike({ likeData, boardId, setRefreshLike }) {
   const [likeAction, setLikeAction] = useState("");
+  const TOKEN = sessionStorage.getItem("ACCESS_TOKEN")
 
   const onLike = () => {
     fetch(`${LIKE_API}/community/boards/${boardId}/likes`, {
       headers: {
-        Authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.NwpC8Kujp2xApfX0n-OLf34ouXyZjAU0b3bBoH86itY",
+        Authorization: TOKEN,
       },
       method: "POST",
     })

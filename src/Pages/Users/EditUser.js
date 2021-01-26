@@ -24,6 +24,8 @@ const tailLayout = {
 };
 
 function EditUser() {
+  const TOKEN = sessionStorage.getItem("ACCESS_TOKEN")
+
   let histroy = useHistory();
   const { categoryId, boardId } = useParams();
   const [tagData, setTagData] = useState([]);
@@ -69,7 +71,7 @@ function EditUser() {
     await axios
       .put(`${BOARD_USER_API}/community/categories/${categoryId}/boards/${boardId}`, editData, {
         headers: {
-          Authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.NwpC8Kujp2xApfX0n-OLf34ouXyZjAU0b3bBoH86itY",
+          Authorization: TOKEN,
         },
       })
       .then((res) => {

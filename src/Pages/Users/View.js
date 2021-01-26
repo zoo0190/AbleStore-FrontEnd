@@ -7,7 +7,10 @@ import { DashOutlined } from "@ant-design/icons";
 import LikeDisLike from "./LikeDisLike";
 import { BOARD_USER_API } from "../../Enum";
 
+
 function View({ userData, commentUserData, boardId, categoryId, likeData, setRefreshLike }) {
+  const TOKEN = sessionStorage.getItem("ACCESS_TOKEN")
+
   let history = useHistory();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -17,11 +20,17 @@ function View({ userData, commentUserData, boardId, categoryId, likeData, setRef
 
   const handleOk = async () => {
     setIsModalVisible(false);
-    await axios.delete(`${BOARD_USER_API}/community/categories/${categoryId}/boards/${boardId}`, {
-      headers: {
-        Authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mn0.aU6ChK-2f2V_6DQaLKkpsWOS4742sIC_DjQ801RT2b4",
-      },
-    });
+    await axios
+      .delete(`${BOARD_USER_API}/community/categories/${categoryId}/boards/${boardId}`, {
+        headers: {
+          Authorization: TOKEN,
+        },
+      })
+      .then((res) => {
+        if (res) {
+          history.push("/forum/1");
+        }
+      });
   };
 
   const handleCancel = () => {

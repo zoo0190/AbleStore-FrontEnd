@@ -5,6 +5,8 @@ import styled from "styled-components";
 import { DashOutlined } from "@ant-design/icons";
 
 function SingleComment({ comment, commentId, refresh }) {
+  const TOKEN = sessionStorage.getItem("ACCESS_TOKEN")
+
   const [OpenReply, setOpenReply] = useState(false);
   const [commentVaule, setCommentValue] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -49,7 +51,7 @@ function SingleComment({ comment, commentId, refresh }) {
     setIsModalVisible(false);
     await axios.delete(``, {
       headers: {
-        Authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.NwpC8Kujp2xApfX0n-OLf34ouXyZjAU0b3bBoH86itY",
+        Authorization: TOKEN,
       },
     });
   };
