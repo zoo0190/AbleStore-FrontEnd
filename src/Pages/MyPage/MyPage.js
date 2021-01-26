@@ -13,6 +13,7 @@ function MyPage() {
   console.log(myPageInfo.avatarId);
 
   const currentToken = sessionStorage.getItem("ACCESS_TOKEN");
+
   React.useEffect(() => {
     fetch(`http://172.30.1.48:8000/community/users/${myPageInfo.avatarId}/profile`, {
       method: "GET",
@@ -172,6 +173,6 @@ const MyPageMainTitle = styled.div`
   font-weight: 300;
 `;
 const MyPageMainPost = styled.div`
-  height: 3em;
+  height: auto;
   border-bottom: 1px solid lightgrey;
 `;
