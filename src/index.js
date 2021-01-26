@@ -8,7 +8,6 @@ import GlobalStyle from "./Styles/GlobalStyles";
 import { ThemeProvider } from "styled-components";
 import Theme from "./Styles/Theme";
 
-
 const store = createStore(rootReducer);
 
 ReactDOM.render(

@@ -56,9 +56,8 @@ function Login() {
       .then((res) => {
         if (res.ACCESS_TOKEN) {
           sessionStorage.setItem("ACCESS_TOKEN", res.ACCESS_TOKEN);
+          sessionStorage.setItem("USER_NICKNAME", res.USER_NICKNAME);
           alert("환영합니다");
-          console.log(res.ACCESS_TOKEN);
-          console.log("input passed");
           history.push({
             pathname: "/",
           });

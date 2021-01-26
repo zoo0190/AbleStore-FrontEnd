@@ -16,7 +16,7 @@ function Header() {
         key="0"
         style={{ padding: "20px 12px", fontWeight: "700", cursor: "unset", backgroundColor: "transparent" }}
       >
-        <strong>YS</strong>
+        <strong>{sessionStorage.getItem("USER_NICKNAME")}</strong>
       </Menu.Item>
       <Menu.Item key="1">
         <Link to="#">Profile</Link>
@@ -28,7 +28,15 @@ function Header() {
         <Link to="#">Synology Account</Link>
       </Menu.Item>
       <Menu.Item key="4" style={{ backgroundColor: "transparent", cursor: "unset" }}>
-        <Button type="primary" style={{ margin: "10px 0" }}>
+        <Button
+          onClick={() => {
+            sessionStorage.removeItem("ACCESS_TOKEN");
+            sessionStorage.removeItem("USER_NICKNAME");
+            history.push("/");
+          }}
+          type="primary"
+          style={{ margin: "10px 0" }}
+        >
           sign out
         </Button>
       </Menu.Item>
@@ -40,14 +48,14 @@ function Header() {
       <Nav>
         <HeaderLogo />
         <HeaderMenu />
-        {true ? (
+        {sessionStorage.getItem("ACCESS_TOKEN") ? (
           <SuccessWrapper>
             <PositionContainer>
               <MessageIcon onClick={() => history.push("/private_message/inbox")}></MessageIcon>
               <BellIcon onClick={() => history.push("/notification")}></BellIcon>
               <Dropdown overlay={menu} trigger={"click"}>
                 <Avatar size={40} style={{ marginRight: "40px", cursor: "pointer" }}>
-                  1
+                  {sessionStorage.getItem("USER_NICKNAME")[0]}
                 </Avatar>
               </Dropdown>
             </PositionContainer>

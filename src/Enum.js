@@ -27,6 +27,6 @@ export const COUNTRY = {
   ],
 };
 
-export const SIGN_UP_API = "http://172.30.1.51:8000/user/signup";
+export const SIGN_UP_API = "http://172.30.1.48:8000/user/signup";
 
-export const LOGIN_API = "http://172.30.1.51:8000/user/signin";
+export const LOGIN_API = "http://172.30.1.48:8000/user/signin";

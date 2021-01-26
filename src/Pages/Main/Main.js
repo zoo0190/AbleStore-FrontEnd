@@ -3,12 +3,9 @@ import Header from "../../Components/Organisms/Header/Header";
 import styled from "styled-components";
 import Categories from "../../Components/Organisms/Categories/Categories";
 import Discussions from "../../Components/Organisms/Discussions/Discussions";
-import Header from "../../Components/Organisms/Header/Header";
 import MainBanner from "../../Components/Organisms/MainBanner/MainBanner";
 import "antd/dist/antd.css";
 import { BackTop } from "antd";
-
-
 
 function Main() {
   return (
