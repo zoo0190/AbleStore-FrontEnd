@@ -5,7 +5,7 @@ import SingleComment from "./SingleComment";
 import CommentReply from "./CommentReply";
 import styled from "styled-components";
 
-function CommentView({ postId, setRfresh, commentUserData }) {
+function CommentView({ boardId, categoryId, setRefreshComment, setRfresh, commentUserData }) {
   const getClick = (e) => {
     console.log(e);
   };
@@ -27,7 +27,7 @@ function CommentView({ postId, setRfresh, commentUserData }) {
           <SingleComment commentId={comment.id} comment={comment} onClick={getClick} />
         ))}
 
-      <CommentWrite postId={postId} setRfresh={setRfresh} />
+      <CommentWrite boardId={boardId} setRefreshComment={setRefreshComment} categoryId={categoryId} />
     </>
   );
 }
