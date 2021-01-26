@@ -23,7 +23,7 @@ const Discussions = () => {
 
   const goToProfile = (e) => {
     if (e.coment_last.nickname) {
-      return history.push(`/user/${e.coment_last.id}/profile/topic`);
+      return history.push(`/user/${e.coment_last.user_id}/profile/topic`);
     } else {
       return history.push(`/user/${e.user_id}/profile/topic`);
     }

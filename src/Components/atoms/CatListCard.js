@@ -10,11 +10,18 @@ const CatListCard = ({ cardData, fromMyPage }) => {
     const { category_id, board_id } = cardData;
     history.push(`/boardDetail/${category_id}/${board_id}`);
   };
-
+  console.log(cardData);
+  const goToUserPage = () => {
+    if(cardData.comment_number === 0){
+      history.push(`/user/${cardData.user_id}/profile/topic`);
+    } else {
+      history.push(`/user/${cardData.coment_last.user_id}/profile/topic`);
+    }
+  }
   return (
-    <CatListCardWrapper onClick={postClick}>
+    <CatListCardWrapper>
       <CardLeft>
-        <LeftTop>{cardData.title}</LeftTop>
+        <LeftTop onClick={postClick}>{cardData.title}</LeftTop>
         <LeftMiddle>{cardData.comment_number === 0 ? cardData.content : cardData.coment_last.content}</LeftMiddle>
         <LeftBottom>
           {cardData.tags.map((el, id) => {
@@ -28,7 +35,7 @@ const CatListCard = ({ cardData, fromMyPage }) => {
       </CardLeft>
       <CardRight>
         {!fromMyPage && (
-          <RightProfile>
+          <RightProfile onClick={goToUserPage}>
             {cardData.comment_number === 0
               ? cardData.user_nickname.slice(0, 1)
               : cardData.coment_last.nickname.slice(0, 1)}
@@ -50,7 +57,6 @@ const CatListCardWrapper = styled.div`
   display: flex;
   width: 100%;
   height: 8em;
-  cursor: pointer;
 `;
 
 const CardLeft = styled.div`
@@ -66,6 +72,7 @@ const LeftTop = styled.div`
   font-size: 1.5em;
   font-weight: bold;
   margin-bottom: 0.4em;
+  cursor: pointer;
 `;
 const LeftMiddle = styled.div`
   overflow: hidden;
@@ -129,6 +136,7 @@ const RightProfile = styled.div`
   font-size: 1.2em;
   font-weight: 600;
   color: white;
+  cursor: pointer;
 `;
 
 const RightUserName = styled.div`

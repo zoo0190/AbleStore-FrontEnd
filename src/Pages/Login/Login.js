@@ -3,7 +3,8 @@ import { useHistory } from "react-router";
 import LoginLayout from "../../Components/Molecules/LoginLayout";
 import styled from "styled-components";
 import { LOGIN_API } from "../../Enum";
-
+//aramcho206@gmail.com
+//aramcho206
 const pwRule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 const emailRule = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 
