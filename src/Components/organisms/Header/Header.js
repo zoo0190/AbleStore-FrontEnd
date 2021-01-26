@@ -19,7 +19,7 @@ function Header() {
         <strong>{sessionStorage.getItem("USER_NICKNAME")}</strong>
       </Menu.Item>
       <Menu.Item key="1">
-        <Link to="#">Profile</Link>
+        <Link to="/MyPage">Profile</Link>
       </Menu.Item>
       <Menu.Item key="2">
         <Link to="/setting/profile">Settings</Link>
@@ -67,7 +67,6 @@ function Header() {
     </Wrapper>
   );
 }
-
 export default Header;
 
 const Wrapper = styled.header`

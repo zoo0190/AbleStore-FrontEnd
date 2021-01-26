@@ -1,24 +1,28 @@
 import React from "react";
 import { useHistory } from "react-router";
+import {Link} from "react-router-dom"
 import styled from "styled-components";
-import { Button } from "antd";
+import { Button, Breadcrumb } from "antd";
 
 const CatListTop = () => {
   const history = useHistory();
   const goCreatePost = () => {
-    history.push("/");
-  }
-  return(
-  <>
-    <CatListTopMain>
-      <TopTitle> NAS</TopTitle>
-      <ButtonSection>
-        <CreatePostBtn onClick={goCreatePost}>Create a Post</CreatePostBtn>
-      </ButtonSection>
-    </CatListTopMain>
-  </>
-);
-}
+    history.push("/categoryPost/1");
+  };
+  return (
+    <>
+      <Breadcrumb separator=">">
+        <Breadcrumb.Item><Link to="/">Home</Link></Breadcrumb.Item>
+      </Breadcrumb>
+      <CatListTopMain>
+        <TopTitle> NAS</TopTitle>
+        <ButtonSection>
+          <CreatePostBtn onClick={goCreatePost}>Create a Post</CreatePostBtn>
+        </ButtonSection>
+      </CatListTopMain>
+    </>
+  );
+};
 export default CatListTop;
 
 const CatListTopMain = styled.div`

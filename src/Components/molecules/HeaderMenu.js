@@ -54,7 +54,7 @@ const HeaderMenu = () => {
               maxWidth: "25%",
             }}
           >
-            <Link to={`/enu/forum/${item.id}`}>{item.title}</Link>
+            <Link to={`/forum/${item.id}`}>{item.title}</Link>
           </Menu.Item>
         );
       })}
