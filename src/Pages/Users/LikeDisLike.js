@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Tooltip } from "antd";
-import { DislikeOutlined, LikeOutlined } from "@ant-design/icons";
-import axios from "axios";
+import { LikeOutlined } from "@ant-design/icons";
+import { LIKE_API } from "../../Enum";
 
-function LikeDisLike(userId, commentId) {
-  const [likes, setLikes] = useState(0);
+function LikeDisLike({ likeData, boardId, setRefreshLike }) {
   const [likeAction, setLikeAction] = useState("");
-  console.log(likes);
+
   const onLike = () => {
-    console.log(likes);
-    fetch("http://172.30.1.48:8000/community/boards/4/likes", {
+    fetch(`${LIKE_API}/community/boards/${boardId}/likes`, {
       headers: {
         Authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.NwpC8Kujp2xApfX0n-OLf34ouXyZjAU0b3bBoH86itY",
       },
@@ -18,11 +16,10 @@ function LikeDisLike(userId, commentId) {
       .then((res) => res.json())
       .then((res) => {
         if (res.MESSAGE === "BOARD_LIKE_CREATE") {
-          console.log(likes);
-          setLikes(likes + 1);
           setLikeAction("liked");
+          setRefreshLike(res);
         } else {
-          setLikes(likes - 1);
+          setRefreshLike(res);
           setLikeAction("");
         }
       });
@@ -38,7 +35,7 @@ function LikeDisLike(userId, commentId) {
         <Tooltip title="Like">
           <LikeOutlined onClick={onLike} style={{ color: likeAction === "liked" ? "red" : "" }} />
         </Tooltip>
-        <span style={{ paddingLeft: "8px", cursor: "auto" }}>{likes}</span>
+        <span style={{ paddingLeft: "8px", cursor: "auto" }}>{likeData}</span>
       </span>
     </div>
   );

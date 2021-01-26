@@ -3,7 +3,6 @@ import CKEditor from "ckeditor4-react";
 import styled from "styled-components";
 
 const CategoryBoard = ({ setInputData }) => {
-  const [abc, setABC] = useState("");
   const onChange = (e) => {
     setInputData(e.editor.getData());
   };

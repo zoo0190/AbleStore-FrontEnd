@@ -5,11 +5,12 @@ import styled from "styled-components";
 const CatListCard = ({ cardData, fromMyPage }) => {
   const moment = require("moment");
   const history = useHistory();
+
   const postClick = () => {
-    // history.push("");
-    // console.log("post clicked");
+    const { category_id, board_id } = cardData;
+    history.push(`/boardDetail/${category_id}/${board_id}`);
   };
-  
+
   return (
     <CatListCardWrapper onClick={postClick}>
       <CardLeft>

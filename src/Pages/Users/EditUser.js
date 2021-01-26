@@ -4,6 +4,8 @@ import { Form, Input, Button, Select, Tag } from "antd";
 import styled from "styled-components";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
+import { BOARD_USER_API } from "../../Enum";
+import HeaderNav from "../../Components/Organisms/Header/Header";
 
 const { Option } = Select;
 const layout = {
@@ -23,13 +25,14 @@ const tailLayout = {
 
 function EditUser() {
   let histroy = useHistory();
-  const { postId, categoryId } = useParams();
+  const { categoryId, boardId } = useParams();
   const [tagData, setTagData] = useState([]);
   const [topicData, setTopicData] = useState([]);
   const [inputData, setInputData] = useState("");
   const [user, setUser] = useState({});
   const [context, setContext] = useState([]);
   const formRef = useRef();
+  const history = useHistory();
 
   useEffect(() => {
     fetch("http://localhost:3000/data/postData.json")
@@ -42,34 +45,43 @@ function EditUser() {
   }, []);
 
   const loadUser = async () => {
-    const result = await axios.get("http://172.30.1.51:8000/community/categories/1/boards/3");
+    const result = await axios.get(`${BOARD_USER_API}/community/categories/${categoryId}/boards/${boardId}`);
     setUser(result.data.CONTEXT[0]);
     setContext(result.data.CONTEXT[0].tags);
   };
-  console.log(context.toString());
+
   useEffect(() => {
     loadUser();
   }, []);
 
   const onFinish = async (values) => {
     const newData = inputData.indexOf("</p>");
+
     const editData = {
       ...values,
       Topic: values.Topic,
       Title: values.Title,
-      Content: inputData,
+      Content: inputData.substring(3, newData),
       Image: "",
-      Tags: values.Tags.join(","),
+      Tags: values.Tags?.join(","),
     };
 
-    await axios.put(`http://172.30.1.51:8000/community/categories/1/boards/3`, editData, {
-      headers: {
-        Authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.NwpC8Kujp2xApfX0n-OLf34ouXyZjAU0b3bBoH86itY",
-      },
-    });
+    await axios
+      .put(`${BOARD_USER_API}/community/categories/${categoryId}/boards/${boardId}`, editData, {
+        headers: {
+          Authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.NwpC8Kujp2xApfX0n-OLf34ouXyZjAU0b3bBoH86itY",
+        },
+      })
+      .then((res) => {
+        if (res.data.MESSAGE === "MODIFY_SUCCESSFULLY") {
+          history.push(`/boardDetail/${categoryId}/${boardId}`);
+        }
+      });
   };
 
-  const onBack = () => {};
+  const onBack = () => {
+    history.push(`/boardDetail/${categoryId}/${boardId}`);
+  };
 
   const options = [
     {
@@ -83,55 +95,66 @@ function EditUser() {
     </Form.Item>
   );
 
-  const { title, content, topic } = user;
+  const { title, content, topic, tags } = user;
 
+  console.log(typeof aa);
   return (
-    <EditUserContainer>
-      <Title>
-        <h1>Edit</h1>
-      </Title>
-      <Form size={"large"} {...layout} ref={formRef} name="control-ref" onFinish={onFinish}>
-        {formWrapper(
-          "Topic",
-          <Select defaultValue={topic}>
-            {topicData.map((e) => (
-              <Option key={e.id} value={e.text}>
-                <Tag>{e.text}</Tag>
-              </Option>
-            ))}
-          </Select>,
-        )}
+    <>
+      <HeaderNav />
+      <EditUserContainer>
+        <Title>
+          <h1>Edit</h1>
+        </Title>
+        <Form
+          size={"large"}
+          initialValues={{
+            remember: true,
+          }}
+          {...layout}
+          ref={formRef}
+          name="control-ref"
+          onFinish={onFinish}
+        >
+          {formWrapper(
+            "Topic",
+            <Select defaultValue={topic}>
+              {topicData.map((e) => (
+                <Option key={e.id} value={e.text}>
+                  <Tag>{e.text}</Tag>
+                </Option>
+              ))}
+            </Select>,
+          )}
 
-        {/* </Form.Item> */}
+          {formWrapper("Title", <Input type="text" value={title} defaultValue={title} />)}
 
-        {formWrapper("Title", <Input defaultValue={title} />)}
+          {formWrapper(
+            "Tags",
+            <Select mode="multiple" showArrow value={user.tags?.join("")} defaultValue={tags}>
+              {tagData.map((e) => (
+                <Option key={e.id} value={e.text}>
+                  <Tag>{e.text}</Tag>
+                </Option>
+              ))}
+            </Select>,
+          )}
 
-        {formWrapper(
-          "Tags",
-          <Select mode="multiple" showArrow defaultValue={context.toString()}>
-            {tagData.map((e) => (
-              <Option key={e.id} value={e.text}>
-                <Tag>{e.text}</Tag>
-              </Option>
-            ))}
-          </Select>,
-        )}
+          <Form.Item name="Content" label="Content">
+            <EditBoard setInputData={setInputData} content={content} />
+          </Form.Item>
 
-        <Form.Item name="Content" label="Content">
-          <EditBoard setInputData={setInputData} content={content} />
-        </Form.Item>
+          <Form.Item {...tailLayout}>
+            <Button htmlType="button" onClick={onBack}>
+              Back
+            </Button>
 
-        <Form.Item {...tailLayout}>
-          <Button htmlType="button" onClick={onBack}>
-            Back
-          </Button>
-
-          <Button type="primary" htmlType="submit">
-            Update
-          </Button>
-        </Form.Item>
-      </Form>
-    </EditUserContainer>
+            <Button type="primary" htmlType="submit">
+              Update
+            </Button>
+          </Form.Item>
+        </Form>
+      </EditUserContainer>
+    </>
   );
 }
 

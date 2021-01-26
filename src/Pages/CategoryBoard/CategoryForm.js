@@ -3,9 +3,10 @@ import { Form, Input, Button, Select, Tag, Alert } from "antd";
 import "antd/dist/antd.css";
 import CategoryBoard from "./CategoryBoard";
 import axios from "axios";
+import { BOARD_USER_API } from "../../Enum";
 
 const Token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.NwpC8Kujp2xApfX0n-OLf34ouXyZjAU0b3bBoH86itY";
-const API = "http://172.30.1.51:8000/community/categories/1/boards";
+const API = `${BOARD_USER_API}/community/categories/1/boards`;
 
 const { Option } = Select;
 const layout = {
@@ -41,6 +42,7 @@ function CategoryForm() {
 
   const onFinish = (values) => {
     const newData = inputData.indexOf("</p>");
+    console.log(values);
     const requestOptions = {
       method: "POST",
       headers: {
