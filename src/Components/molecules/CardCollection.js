@@ -2,13 +2,13 @@ import React from "react";
 import CatListCard from "../Atoms/CatListCard";
 import styled from "styled-components";
 
-const CardCollection = ({ categoryData }) => {
-//   console.log(categoryData);
+const CardCollection = ({ categoryData, fromMyPage }) => {
+  console.log(categoryData);
   return (
     <>
       <CardCollectionMain>
         {categoryData.map((el, id) => {
-          return <CatListCard cardData={el}/>;
+          return <CatListCard key={id} fromMyPage={fromMyPage} cardData={el}/>;
         })}
       </CardCollectionMain>
     </>

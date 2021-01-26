@@ -2,23 +2,22 @@ import React from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 
-const CatListCard = ({ cardData }) => {
-  const moment = require('moment');
+const CatListCard = ({ cardData, fromMyPage }) => {
+  const moment = require("moment");
   const history = useHistory();
   const postClick = () => {
     // history.push("");
     // console.log("post clicked");
   };
+  
   return (
     <CatListCardWrapper onClick={postClick}>
       <CardLeft>
         <LeftTop>{cardData.title}</LeftTop>
-        <LeftMiddle>
-            {cardData.comment_number === 0 ? cardData.content : cardData.coment_last.content}
-        </LeftMiddle>
+        <LeftMiddle>{cardData.comment_number === 0 ? cardData.content : cardData.coment_last.content}</LeftMiddle>
         <LeftBottom>
           {cardData.tags.map((el, id) => {
-            return <LftBtmTags>{el.name}</LftBtmTags>;
+            return <LftBtmTags key={id}>{el.name}</LftBtmTags>;
           })}
           <LftBtmAuthor>By {cardData.user_nickname}</LftBtmAuthor>
           <LftBtmRightView> {cardData.hit} Views</LftBtmRightView>
@@ -27,15 +26,19 @@ const CatListCard = ({ cardData }) => {
         </LeftBottom>
       </CardLeft>
       <CardRight>
-        <RightProfile>
-          {cardData.comment_number === 0 ? cardData.user_nickname.slice(0, 1) : cardData.coment_last.nickname.slice(0,1)}
-        </RightProfile>
-        <RightUserName>
-            {cardData.comment_number === 0 ? cardData.user_nickname : cardData.coment_last.nickname}
-        </RightUserName>
-        <RightDate>
-            {moment(cardData.created_at).fromNow()}
-        </RightDate>
+        {!fromMyPage && (
+          <RightProfile>
+            {cardData.comment_number === 0
+              ? cardData.user_nickname.slice(0, 1)
+              : cardData.coment_last.nickname.slice(0, 1)}
+          </RightProfile>
+        )}
+        {!fromMyPage && (
+          <RightUserName>
+            {!fromMyPage && (cardData.comment_number === 0 ? cardData.user_nickname : cardData.coment_last.nickname)}
+          </RightUserName>
+        )}
+        <RightDate>{moment(cardData.created_at).fromNow()}</RightDate>
       </CardRight>
     </CatListCardWrapper>
   );

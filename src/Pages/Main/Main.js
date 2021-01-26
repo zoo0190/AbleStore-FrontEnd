@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../../Components/Organisms/Header/Header";
 import styled from "styled-components";
 import Categories from "../../Components/Organisms/Categories/Categories";
-import Header from "../../Components/Organisms/Header/Header";
+// import Header from "../../Components/Organisms/Header/Header";
 import MainBanner from "../../Components/Organisms/MainBanner/MainBanner";
 
 
