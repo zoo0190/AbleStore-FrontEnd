@@ -43,8 +43,9 @@ function Login() {
 
     inputPass && loginFetch();
   };
-
+  console.log(inputs)
   const loginFetch = () => {
+    
     fetch(LOGIN_API, {
       method: "POST",
       body: JSON.stringify({
