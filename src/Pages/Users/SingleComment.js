@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { Comment, Avatar, Button, Input, Menu, Dropdown, Modal } from "antd";
 import axios from "axios";
 import styled from "styled-components";
-import LikeDisLike from "./LikeDisLike";
-import { DownOutlined, DashOutlined } from "@ant-design/icons";
-const { TextArea } = Input;
+import { DashOutlined } from "@ant-design/icons";
 
 function SingleComment({ comment, commentId, refresh }) {
   const [OpenReply, setOpenReply] = useState(false);
@@ -127,7 +125,7 @@ export default SingleComment;
 const CommentContainer = styled.div`
   margin-bottom: 10px;
   border: 1px solid #dddddd;
-  padding: 20px;
+  padding: 10px;
 `;
 
 const CommentInfo = styled.div`
