@@ -7,10 +7,9 @@ import Footer from "./Components/Organisms/Footer/Footer";
 import CategoryPost from "./Pages/CategoryBoard/CategoryPost";
 import BoardDetail from "./Pages/Users/BoardDetail";
 import EditUser from "./Pages/Users/EditUser";
-import CategoryList from "./Pages/CategoryList/CategoryList"
+import CategoryList from "./Pages/CategoryList/CategoryList";
 import MyPage from "./Pages/MyPage/MyPage";
 
-// import Footer from "./Components/Organisms/Footer/Footer";
 class Routes extends React.Component {
   render() {
     return (

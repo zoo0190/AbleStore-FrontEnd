@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const MainBannerDescription = () => (
+const MainBannerDescription = ({ item }) => (
   <Wrapper>
     <Count>59</Count>
-    <CountTitle>Online experts</CountTitle>
+    <CountTitle>{item.countTitle}</CountTitle>
   </Wrapper>
 );
 

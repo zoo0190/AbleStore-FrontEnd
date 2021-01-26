@@ -1,15 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 
-const ItemTypeB = () => (
-  <Wrapping>
-    <Container>
-      <ItemTitle>Legacy Forums</ItemTitle>
-    </Container>
-  </Wrapping>
-);
+const CategorySubButton = ({ item, goToCategory }) => {
+  const handleClick = () => {
+    goToCategory(item.id);
+  };
 
-export default ItemTypeB;
+  return (
+    <Wrapping onClick={handleClick}>
+      <Container>
+        <ItemImg src={item.imgSrc}></ItemImg>
+        <ItemTitle>{item.title}</ItemTitle>
+      </Container>
+    </Wrapping>
+  );
+};
+
+export default CategorySubButton;
 
 const Wrapping = styled.div`
   flex: 0 0 50%;
@@ -31,7 +38,10 @@ const Container = styled.a`
   background-color: #eef3f7;
 `;
 
+const ItemImg = styled.img`
+  margin-right: 4px;
+`;
+
 const ItemTitle = styled.div`
-  margin-top: 12px;
   color: black;
 `;

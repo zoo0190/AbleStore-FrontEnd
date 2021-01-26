@@ -22,7 +22,6 @@ const SignUpLayout = ({
   location,
   clicked,
 }) => {
-  
   const handleChange = (e) => {
     onChange({ name: "location", value: String(e) });
     if (clicked) {
