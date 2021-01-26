@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router";
 import LoginLayout from "../../Components/Molecules/LoginLayout";
 import styled from "styled-components";
-import{ LOGIN_API } from "../../Enum";
+import { LOGIN_API } from "../../Enum";
 
 const pwRule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 const emailRule = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
@@ -43,8 +43,9 @@ function Login() {
 
     inputPass && loginFetch();
   };
-
+  console.log(inputs)
   const loginFetch = () => {
+    
     fetch(LOGIN_API, {
       method: "POST",
       body: JSON.stringify({
@@ -55,10 +56,9 @@ function Login() {
       .then((res) => res.json())
       .then((res) => {
         if (res.ACCESS_TOKEN) {
-          sessionStorage.setItem('ACCESS_TOKEN', res.ACCESS_TOKEN);
+          sessionStorage.setItem("ACCESS_TOKEN", res.ACCESS_TOKEN);
+          sessionStorage.setItem("USER_NICKNAME", res.USER_NICKNAME);
           alert("환영합니다");
-          console.log(res.ACCESS_TOKEN);
-          console.log("input passed");
           history.push({
             pathname: "/",
           });
