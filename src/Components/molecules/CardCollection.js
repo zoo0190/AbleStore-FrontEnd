@@ -3,7 +3,6 @@ import CatListCard from "../Atoms/CatListCard";
 import styled from "styled-components";
 
 const CardCollection = ({ categoryData, fromMyPage }) => {
-  console.log(categoryData);
   return (
     <>
       <CardCollectionMain>
