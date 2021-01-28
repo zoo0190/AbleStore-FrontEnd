@@ -19,7 +19,7 @@ function CommentWrite({ boardId, categoryId, setRefreshComment }) {
       content: commentValue,
     };
 
-    fetch(`http://172.30.1.48:8000/community/boards/${boardId}/comments`, {
+    fetch(`http://172.30.1.37:8000/community/boards/${boardId}/comments`, {
       headers: {
         Authorization: TOKEN,
       },

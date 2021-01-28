@@ -43,7 +43,7 @@ function BoardDetail() {
   };
 
   const getUserCommentData = async () => {
-    const result = await axios.get(`http://172.30.1.48:8000/community/boards/${boardId}/comments`);
+    const result = await axios.get(`http://172.30.1.37:8000/community/boards/${boardId}/comments`);
     setCommentUserData(result.data.CONTEXT);
   };
 
