@@ -88,7 +88,7 @@ const MyPageWrapper = styled.div`
   max-width: 1280px;
   min-width: 1030px;
   margin: 0 auto;
-  height: 100%;
+  /* height: 100%; */
   padding: 1em 1em;
 `;
 const MyPageTop = styled.div`
