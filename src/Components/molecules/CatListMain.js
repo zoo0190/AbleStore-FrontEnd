@@ -3,7 +3,7 @@ import styled from "styled-components";
 import CardCollection from "./CardCollection";
 import { Pagination, Menu, Dropdown, Checkbox } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-const TEMP_API = "http://172.30.1.48:8000/community/categories/1/boards";
+import { CATEGORY_API } from "../../Enum";
 const TEST_API = "/data/AramDataSecond.json";
 
 const CatListMain = () => {
@@ -12,19 +12,21 @@ const CatListMain = () => {
   const [limit, setLimit] = useState("&limit=10");
 
   const onPageChange = (page) => {
-    console.log(page);
-
-    console.log(page);
+    // console.log(page);
     setOffSet(`?offset=${(page - 1) * 10}`);
     setLimit(`&limit=${page * 10}`);
   };
+  const [tag, setTag] = useState([]);
 
   function onCheckChange(e) {
     console.log(e.target.checked);
-    // console.log(`checked = ${e.target.id}`);
+    console.log(`checked = ${e.target.id}`);
     console.log(`checked = ${e.target.checked}`);
+    if (e.target.checked === true) {
+      // setTag{(
+      //   tag : e.target.id)}
+    }
   }
-
   var currentDisplay = "";
   const [passCurrentDisplay, setPassCurrentDisplay] = useState("");
 
@@ -77,21 +79,21 @@ const CatListMain = () => {
   );
 
   React.useEffect(() => {
-    fetch(`http://10.58.7.56:8000/community/categories/1/boards${offset}${limit}`, {
+    fetch(`${CATEGORY_API}${offset}${limit}`, {
       method: "GET",
     })
       .then((res) => res.json())
       .then((res) => setCategoryData(res.CONTEXT));
   }, [offset]);
   React.useEffect(() => {
-    fetch(`http://10.58.7.56:8000/community/categories/1/boards${offset}${limit}${passCurrentDisplay}`, {
+    fetch(`${CATEGORY_API}${offset}${limit}${passCurrentDisplay}`, {
       method: "GET",
     })
       .then((res) => res.json())
       .then((res) => setCategoryData(res.CONTEXT));
   }, [offset, passCurrentDisplay]);
-  console.log(`http://172.30.1.48:8000/community/categories/1/boards${offset}${limit}${passCurrentDisplay}`);
-  console.log(categoryData);
+  console.log("indese tag {}: ", categoryData);
+
   return (
     <>
       <CatListMainWrapper>

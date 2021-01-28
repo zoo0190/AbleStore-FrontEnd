@@ -3,6 +3,7 @@ import Header from "../../Components/Organisms/Header/Header";
 import styled from "styled-components";
 import CardCollection from "../../Components/Molecules/CardCollection";
 import { useHistory, useParams } from "react-router";
+import { MY_PAGE } from "../../Enum";
 //"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mn0.aU6ChK-2f2V_6DQaLKkpsWOS4742sIC_DjQ801RT2b4"
 function MyPage() {
   const history = useHistory();
@@ -13,8 +14,9 @@ function MyPage() {
   console.log(myPageInfo.avatarId);
 
   const currentToken = sessionStorage.getItem("ACCESS_TOKEN");
+
   React.useEffect(() => {
-    fetch(`http://10.58.7.56:8000/community/users/${myPageInfo.avatarId}/profile`, {
+    fetch(`${MY_PAGE}${myPageInfo.avatarId}/profile`, {
       method: "GET",
       headers: {
         Authorization: currentToken,
@@ -27,7 +29,7 @@ function MyPage() {
   console.log(myData);
 
   React.useEffect(() => {
-    fetch(`http://10.58.7.56:8000/community/users/${myPageInfo.avatarId}/profile`, {
+    fetch(`${MY_PAGE}${myPageInfo.avatarId}/profile`, {
       method: "GET",
       headers: {
         Authorization: currentToken,
