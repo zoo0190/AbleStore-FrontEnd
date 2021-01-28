@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import MainCard from "../../Molecules/MainCard";
 import SectionTitle from "../../Atoms/SectionTitle";
+import { useHistory } from "react-router-dom";
 import { Tabs } from "antd";
 import "antd/dist/antd.css";
-import MainCard from "../../Molecules/MainCard";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
+import { BOARD_USER_API } from "../../../Enum";
 
 const Discussions = () => {
   const { TabPane } = Tabs;
@@ -14,7 +15,7 @@ const Discussions = () => {
   const history = useHistory();
 
   const goToDetail = (e) => {
-    history.push(`/forum/${e.category_id}/post/${e.board_id}`);
+    history.push(`/boardDetail/${e.category_id}/${e.board_id}`);
   };
 
   const goToTags = (e) => {
@@ -30,7 +31,7 @@ const Discussions = () => {
   };
 
   useEffect(() => {
-    fetch("http://172.30.1.48:8000/community/boards")
+    fetch(`${BOARD_USER_API}/community/boards`)
       .then((res) => res.json())
       .then((res) => {
         setCardList(res.CONTEXT);

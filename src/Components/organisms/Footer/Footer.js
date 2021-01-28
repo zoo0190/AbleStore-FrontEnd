@@ -46,6 +46,7 @@ const Wrapper = styled.footer`
   max-width: 1280px;
   min-width: 1030px;
   margin: 10px auto;
+  margin-top: auto;
   display: flex;
   font-size: 13px;
   line-height: 1.5;
