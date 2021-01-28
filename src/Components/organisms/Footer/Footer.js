@@ -50,7 +50,7 @@ const Wrapper = styled.footer`
   display: flex;
   font-size: 13px;
   line-height: 1.5;
-  padding: 0 15px;
+  padding: 30px 15px;
   height: 42px;
   align-items: center;
 `;
