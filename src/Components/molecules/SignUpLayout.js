@@ -3,7 +3,7 @@ import styled from "styled-components";
 import FormLayout from "../Atoms/FormLayout";
 import InputComp from "../Atoms/Input";
 import { Select } from "antd";
-import { COUNTRY } from "../../../src/Enum";
+import { COUNTRY } from "../../Enum";
 import "antd/dist/antd.css";
 
 const { Option } = Select;

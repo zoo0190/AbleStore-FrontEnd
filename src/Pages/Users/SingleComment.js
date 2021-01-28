@@ -1,33 +1,35 @@
 import React, { useState } from "react";
-import { Comment, Avatar, Button, Input, Menu, Dropdown, Modal } from "antd";
+import { Comment, Avatar, Button, Input, Menu, Dropdown, Modal, Tag } from "antd";
 import axios from "axios";
 import styled from "styled-components";
 import { DashOutlined } from "@ant-design/icons";
+import { SOLUTION_API, BOARD_USER_API, REPLY_API } from "../../Enum";
+import { useHistory } from "react-router-dom";
 
-function SingleComment({ comment, commentId, refresh }) {
-  const TOKEN = sessionStorage.getItem("ACCESS_TOKEN")
-
+function SingleComment({ comment, boardId, setRefreshComment, categoryId }) {
+  const TOKEN = sessionStorage.getItem("ACCESS_TOKEN");
   const [OpenReply, setOpenReply] = useState(false);
   const [commentVaule, setCommentValue] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [checkdSolution, setCheckedSolution] = useState(false);
+  const { CheckableTag } = Tag;
+  const history = useHistory();
 
   const onSubmit = (event) => {
     event.preventDefault();
-
+    setCommentValue("");
     const commentData = {
-      commentList: commentVaule,
-
-      responseTo: comment.id,
-      //  데뎃글쓴사람의 id , 모든뎃글리스트들에서 responseTo id가 있는것만 넣게됨
+      content: commentVaule,
     };
-
-    const result = axios.post("", commentData).then((res) => {
-      if (res.data.success) {
-        setCommentValue("");
-      } else {
-        alert("저장하지 못했습니다.");
-      }
-    });
+    fetch(`${REPLY_API}/${boardId}/comments/${comment.id}/comments`, {
+      headers: {
+        Authorization: TOKEN,
+      },
+      method: "POST",
+      body: JSON.stringify(commentData),
+    })
+      .then((res) => res.json())
+      .then((res) => setRefreshComment(res));
   };
 
   const onHadleChange = (event) => {
@@ -40,20 +42,31 @@ function SingleComment({ comment, commentId, refresh }) {
 
   const actions = [
     <>
-      {/* <LikeDisLike commentId={comment.id} /> */}
       <span onClick={onClickReplyOpen} key="comment-basic-reply-to">
         Reply to
       </span>
     </>,
   ];
+
   const handleOk = async () => {
-    console.log();
     setIsModalVisible(false);
-    await axios.delete(``, {
+    const commentId = {
+      comment_id: comment.id,
+    };
+    fetch(`${BOARD_USER_API}/community/boards/${boardId}/comments`, {
       headers: {
         Authorization: TOKEN,
       },
-    });
+      method: "DELETE",
+      body: JSON.stringify(commentId),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res) {
+          setRefreshComment(res);
+          history.push(`/boardDetail/${categoryId}/${boardId}`);
+        }
+      });
   };
   const showModal = () => {
     setIsModalVisible(true);
@@ -62,49 +75,89 @@ function SingleComment({ comment, commentId, refresh }) {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-  const menu = (
-    <Menu>
-      <Menu.Item>
-        <Button onClick style={{ border: "none" }}>
-          Edit
-        </Button>
-      </Menu.Item>
-      <Menu.Item>
-        <Button style={{ border: "none" }} onClick={showModal}>
-          Delete
-        </Button>
-        <Modal
-          style={{ marginTop: "150px" }}
-          visible={isModalVisible}
-          cancelText="No"
-          okText="Yes"
-          onOk={() => handleOk()}
-          onCancel={handleCancel}
-        >
-          <p>Are you sure you want to delete the post?</p>
-        </Modal>
-      </Menu.Item>
-    </Menu>
-  );
+  const menu = () => {
+    return (
+      <Menu>
+        <Menu.Item>
+          <Button onClick style={{ border: "none" }}>
+            Edit
+          </Button>
+        </Menu.Item>
+        <Menu.Item>
+          <Button style={{ border: "none" }} onClick={showModal}>
+            Delete
+          </Button>
+          <Modal
+            style={{ marginTop: "150px" }}
+            visible={isModalVisible}
+            cancelText="No"
+            okText="Yes"
+            onOk={() => handleOk()}
+            onCancel={handleCancel}
+          >
+            <p>Are you sure you want to delete the post?</p>
+          </Modal>
+        </Menu.Item>
+      </Menu>
+    );
+  };
+  const nickName = sessionStorage.getItem("USER_NICKNAME");
+
+  const changeChecked = async () => {
+    setCheckedSolution(true);
+    if (checkdSolution === false) {
+      fetch(`${SOLUTION_API}/${boardId}/comments/${comment.id}`, {
+        headers: {
+          Authorization: TOKEN,
+        },
+        method: "POST",
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+        });
+    } else {
+      console.log("end");
+    }
+  };
 
   return (
     <CommentContainer>
       <CommentInfo>
         <div>
+          <span
+            style={{
+              display: "inline-block",
+              marginRight: "10px",
+              borderRadius: "50%",
+              padding: "12px",
+              backgroundColor: "#dadada",
+            }}
+          >
+            {nickName?.split("")[0]}{" "}
+          </span>
           <span>{comment.nickname}</span>
           <span>@{comment.code}</span>
-          <span>{comment.created_at.split("T")[0]}</span>
+          <span>{comment.created_at?.split("T")[0]}</span>
         </div>
-
         <div>
-          <Dropdown overlay={menu}>
-            <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-              <DashOutlined />
-            </a>
-          </Dropdown>
+          {nickName !== comment.nickname && (
+            <CheckableTag onClick={changeChecked} checked={checkdSolution}>
+              Solution
+            </CheckableTag>
+          )}
+
+          {nickName === comment.nickname && (
+            <Dropdown overlay={menu}>
+              <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+                <DashOutlined />
+              </a>
+            </Dropdown>
+          )}
         </div>
       </CommentInfo>
-      <Comment actions={actions} author avatar={<Avatar src alt />} content={<p>{comment.content}</p>} />
+      <Comment actions={actions} content={<p>{comment.content}</p>} />
+
       {OpenReply && (
         <form style={{ display: "flex" }} onSubmit={onSubmit}>
           <textarea

@@ -6,28 +6,38 @@ import CommentReply from "./CommentReply";
 import styled from "styled-components";
 
 function CommentView({ boardId, categoryId, setRefreshComment, setRfresh, commentUserData }) {
-  const getClick = (e) => {
-    console.log(e);
-  };
+  const TOKEN = sessionStorage.getItem("ACCESS_TOKEN");
 
   return (
     <>
-      {/* {commentUserData &&
-        commentUserData.map((comment, index) => {
-          !comment.responseTo && (
-            <>
-              <SingleComment refresh={refresh} comment={comment} postId={postId} />
-              <CommentReply parentCommentId={commentId} postId={postId} commentUserData={commentUserData} />
-            </>
-          );
-        })} */}
-
       {commentUserData &&
-        commentUserData.map((comment, index) => (
-          <SingleComment commentId={comment.id} comment={comment} onClick={getClick} />
-        ))}
+        commentUserData.map((comment, index) => {
+          return (
+            !comment.reply && (
+              <>
+                <SingleComment
+                  commentId={comment.id}
+                  boardId={boardId}
+                  comment={comment}
+                  setRefreshComment={setRefreshComment}
+                  reply={comment.reply}
+                  parentCommentId={comment.id}
+                  categoryId={categoryId}
+                />
+                <CommentReply
+                  parentCommentId={comment.id}
+                  boardId={boardId}
+                  comment={comment}
+                  commentUserData={commentUserData}
+                  setRefreshComment={setRefreshComment}
+                  categoryId={categoryId}
+                />
+              </>
+            )
+          );
+        })}
 
-      <CommentWrite boardId={boardId} setRefreshComment={setRefreshComment} categoryId={categoryId} />
+      {TOKEN && <CommentWrite boardId={boardId} setRefreshComment={setRefreshComment} categoryId={categoryId} />}
     </>
   );
 }

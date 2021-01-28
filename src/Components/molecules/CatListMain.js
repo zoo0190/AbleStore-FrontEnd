@@ -3,7 +3,7 @@ import styled from "styled-components";
 import CardCollection from "./CardCollection";
 import { Pagination, Menu, Dropdown, Checkbox } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-const TEMP_API = "http://172.30.1.48:8000/community/categories/1/boards";
+const TEMP_API = "http://172.30.1.37:8000/community/categories/1/boards";
 const TEST_API = "/data/AramDataSecond.json";
 
 const CatListMain = () => {
@@ -77,21 +77,20 @@ const CatListMain = () => {
   );
 
   React.useEffect(() => {
-    fetch(`http://172.30.1.48:8000/community/categories/1/boards${offset}${limit}`, {
+    fetch(`http://172.30.1.37:8000/community/categories/1/boards${offset}${limit}`, {
       method: "GET",
     })
       .then((res) => res.json())
       .then((res) => setCategoryData(res.CONTEXT));
   }, [offset]);
   React.useEffect(() => {
-    fetch(`http://172.30.1.48:8000/community/categories/1/boards${offset}${limit}${passCurrentDisplay}`, {
+    fetch(`http://172.30.1.37:8000/community/categories/1/boards${offset}${limit}${passCurrentDisplay}`, {
       method: "GET",
     })
       .then((res) => res.json())
       .then((res) => setCategoryData(res.CONTEXT));
-  }, [offset,passCurrentDisplay]);
-  console.log(`http://172.30.1.48:8000/community/categories/1/boards${offset}${limit}${passCurrentDisplay}`);
-  console.log(categoryData);
+  }, [offset, passCurrentDisplay]);
+
   return (
     <>
       <CatListMainWrapper>

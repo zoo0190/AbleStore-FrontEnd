@@ -7,9 +7,8 @@ import { DashOutlined } from "@ant-design/icons";
 import LikeDisLike from "./LikeDisLike";
 import { BOARD_USER_API } from "../../Enum";
 
-
 function View({ userData, commentUserData, boardId, categoryId, likeData, setRefreshLike }) {
-  const TOKEN = sessionStorage.getItem("ACCESS_TOKEN")
+  const TOKEN = sessionStorage.getItem("ACCESS_TOKEN");
 
   let history = useHistory();
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -101,11 +100,13 @@ function View({ userData, commentUserData, boardId, categoryId, likeData, setRef
         <ContentHeader>
           <UserInfo>
             <div>
-              <span>{nickname}</span>
-              <span>{code}</span>
+              <span>
+                <SpanOne>{nickname?.split("")[0]} </SpanOne> {nickname}
+              </span>
+              <span>@{code}</span>
             </div>
             <div>
-              <span>{created_at?.split("T")[0]}</span>
+              <span className="year">{created_at?.split("T")[0]}</span>
             </div>
           </UserInfo>
           <UserSet>
@@ -132,7 +133,7 @@ const ViewContainer = styled.div`
   height: 400px;
 `;
 const Header = styled.header`
-  margin-bottom: 30px;
+  margin-bottom: 5px;
 `;
 const TitleContainer = styled.div`
   display: flex;
@@ -158,10 +159,27 @@ const Li = styled.li`
   padding-right: 30px;
 `;
 
-const UserInfo = styled.div``;
+const UserInfo = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  .year {
+    display: block;
+    margin-top: 12px;
+    margin-left: 45px;
+  }
+`;
 
 const ContentBody = styled.div`
   margin-top: 20px;
   width: 650px;
   height: 350px;
+`;
+const SpanOne = styled.span`
+  display: inline-block;
+  padding: 12px;
+  background-color: #dadada;
+  border-radius: 50%;
+  color: #fff;
 `;

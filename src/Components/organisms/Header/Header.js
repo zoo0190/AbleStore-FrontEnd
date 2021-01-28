@@ -3,7 +3,6 @@ import styled from "styled-components";
 import HeaderLogo from "../../Molecules/HeaderLogo";
 import HeaderMenu from "../../Molecules/HeaderMenu";
 import HeaderSignin from "../../Molecules/HeaderSignin";
-import "antd/dist/antd.css";
 import { Avatar, Menu, Dropdown, Button } from "antd";
 import { Link, useHistory } from "react-router-dom";
 

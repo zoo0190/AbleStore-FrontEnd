@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Input } from "antd";
 import styled from "styled-components";
-import "antd/dist/antd.css";
 
 const pwRule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 const emailRule = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
@@ -19,7 +18,7 @@ function InputComp({
   clicked,
 }) {
   const [inputText, setInput] = useState({ value: "" });
-  
+
   const pushOnChange = (e) => {
     const { value, name } = e.target;
     onChange({ value: value, name: name });
@@ -50,8 +49,7 @@ function InputComp({
   return (
     <div className="Input">
       <InputWrapper>
-        <InputField name={name} type={type} placeholder={placeholder} 
-        onChange={pushOnChange} value={inputText.value} />
+        <InputField name={name} type={type} placeholder={placeholder} onChange={pushOnChange} value={inputText.value} />
       </InputWrapper>
     </div>
   );

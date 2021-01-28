@@ -3,16 +3,15 @@ import Header from "../../Components/Organisms/Header/Header";
 import styled from "styled-components";
 import CardCollection from "../../Components/Molecules/CardCollection";
 import { useHistory, useParams } from "react-router";
-//"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mn0.aU6ChK-2f2V_6DQaLKkpsWOS4742sIC_DjQ801RT2b4"
+
 function MyPage() {
   const history = useHistory();
   const [myData, setMyData] = useState([]);
   const [myPostData, setMyPostData] = useState([]);
   const myPageInfo = useParams();
 
-  console.log(myPageInfo.avatarId);
-
   const currentToken = sessionStorage.getItem("ACCESS_TOKEN");
+
   React.useEffect(() => {
     fetch(`http://172.30.1.48:8000/community/users/${myPageInfo.avatarId}/profile`, {
       method: "GET",
@@ -23,8 +22,6 @@ function MyPage() {
       .then((res) => res.json())
       .then((res) => setMyData(res.user_info));
   }, []);
-
-  console.log(myData);
 
   React.useEffect(() => {
     fetch(`http://172.30.1.48:8000/community/users/${myPageInfo.avatarId}/profile`, {

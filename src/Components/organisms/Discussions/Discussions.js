@@ -14,7 +14,7 @@ const Discussions = () => {
   const history = useHistory();
 
   const goToDetail = (e) => {
-    history.push(`/forum/${e.category_id}/post/${e.board_id}`);
+    history.push(`/boardDetail/${e.category_id}/${e.board_id}`);
   };
 
   const goToTags = (e) => {

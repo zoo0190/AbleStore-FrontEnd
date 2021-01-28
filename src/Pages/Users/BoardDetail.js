@@ -21,7 +21,6 @@ function BoardDetail() {
       .get(`${BOARD_USER_API}/community/categories/${categoryId}/boards/${boardId}`)
       .then((res) => {
         if (res) {
-          console.log(res.data.CONTEXT[0]);
           setUserData(res.data.CONTEXT[0]);
           setLikeData(res.data.CONTEXT[0].like);
         } else {
@@ -35,7 +34,6 @@ function BoardDetail() {
       .get(`${BOARD_USER_API}/community/categories/${categoryId}/boards/${boardId}/hits`)
       .then((res) => {
         if (res) {
-          console.log(res);
         } else {
           alert("작성자 정보를 가져오길 실패했습니다");
         }
@@ -43,8 +41,8 @@ function BoardDetail() {
   };
 
   const getUserCommentData = async () => {
-    const result = await axios.get(`http://172.30.1.48:8000/community/boards/${boardId}/comments`);
-    setCommentUserData(commentUserData?.concat(result.data.CONTEXT));
+    const result = await axios.get(`${BOARD_USER_API}/community/boards/${boardId}/comments`);
+    setCommentUserData(result.data.CONTEXT);
   };
 
   useEffect(() => {
