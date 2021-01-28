@@ -77,19 +77,19 @@ const CatListMain = () => {
   );
 
   React.useEffect(() => {
-    fetch(`http://172.30.1.48:8000/community/categories/1/boards${offset}${limit}`, {
+    fetch(`http://10.58.7.56:8000/community/categories/1/boards${offset}${limit}`, {
       method: "GET",
     })
       .then((res) => res.json())
       .then((res) => setCategoryData(res.CONTEXT));
   }, [offset]);
   React.useEffect(() => {
-    fetch(`http://172.30.1.48:8000/community/categories/1/boards${offset}${limit}${passCurrentDisplay}`, {
+    fetch(`http://10.58.7.56:8000/community/categories/1/boards${offset}${limit}${passCurrentDisplay}`, {
       method: "GET",
     })
       .then((res) => res.json())
       .then((res) => setCategoryData(res.CONTEXT));
-  }, [offset,passCurrentDisplay]);
+  }, [offset, passCurrentDisplay]);
   console.log(`http://172.30.1.48:8000/community/categories/1/boards${offset}${limit}${passCurrentDisplay}`);
   console.log(categoryData);
   return (

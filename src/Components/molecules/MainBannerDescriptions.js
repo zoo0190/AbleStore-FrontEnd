@@ -1,29 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MainBannerDescription from "../Atoms/MainBannerDescription";
 import styled from "styled-components";
+import { BOARD_USER_API } from "../../Enum";
 
-const COUNT_TITLE = [
-  {
-    id: 1,
-    countTitle: "Online experts",
-  },
-  {
-    id: 2,
-    countTitle: "Today's Posts",
-  },
-  {
-    id: 3,
-    countTitle: "Total Posts",
-  },
-];
+const MainBannerDescriptions = () => {
+  const [postCount, setPostCount] = useState([]);
 
-const MainBannerDescriptions = () => (
-  <Wrapper>
-    {COUNT_TITLE.map((item) => (
-      <MainBannerDescription key={item.id} item={item} />
-    ))}
-  </Wrapper>
-);
+  useEffect(() => {
+    fetch(`${BOARD_USER_API}/community/boards/numbers`)
+      .then((res) => res.json())
+      .then((res) => {
+        setPostCount(res.CONTEXT);
+      });
+  }, []);
+
+  return (
+    <Wrapper>
+      {postCount.map((item) => (
+        <MainBannerDescription key={item.id} item={item} />
+      ))}
+    </Wrapper>
+  );
+};
 
 export default MainBannerDescriptions;
 

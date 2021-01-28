@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 const MainBannerDescription = ({ item }) => (
   <Wrapper>
-    <Count>59</Count>
-    <CountTitle>{item.countTitle}</CountTitle>
+    <Count>{item.count_number}</Count>
+    <CountTitle>{item.count_title}</CountTitle>
   </Wrapper>
 );
 

@@ -14,7 +14,7 @@ function MyPage() {
 
   const currentToken = sessionStorage.getItem("ACCESS_TOKEN");
   React.useEffect(() => {
-    fetch(`http://172.30.1.48:8000/community/users/${myPageInfo.avatarId}/profile`, {
+    fetch(`http://10.58.7.56:8000/community/users/${myPageInfo.avatarId}/profile`, {
       method: "GET",
       headers: {
         Authorization: currentToken,
@@ -27,7 +27,7 @@ function MyPage() {
   console.log(myData);
 
   React.useEffect(() => {
-    fetch(`http://172.30.1.48:8000/community/users/${myPageInfo.avatarId}/profile`, {
+    fetch(`http://10.58.7.56:8000/community/users/${myPageInfo.avatarId}/profile`, {
       method: "GET",
       headers: {
         Authorization: currentToken,
@@ -172,6 +172,6 @@ const MyPageMainTitle = styled.div`
   font-weight: 300;
 `;
 const MyPageMainPost = styled.div`
-  height: 3em;
+  height: auto;
   border-bottom: 1px solid lightgrey;
 `;
