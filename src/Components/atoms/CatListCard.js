@@ -10,7 +10,7 @@ const CatListCard = ({ cardData, fromMyPage }) => {
     const { category_id, board_id } = cardData;
     history.push(`/boardDetail/${category_id}/${board_id}`);
   };
-  console.log(cardData);
+  // console.log(cardData);
   const goToUserPage = () => {
     if(cardData.comment_number === 0){
       history.push(`/user/${cardData.user_id}/profile/topic`);
