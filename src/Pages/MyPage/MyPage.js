@@ -3,7 +3,8 @@ import Header from "../../Components/Organisms/Header/Header";
 import styled from "styled-components";
 import CardCollection from "../../Components/Molecules/CardCollection";
 import { useHistory, useParams } from "react-router";
-
+import { MY_PAGE } from "../../Enum";
+//"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mn0.aU6ChK-2f2V_6DQaLKkpsWOS4742sIC_DjQ801RT2b4"
 function MyPage() {
   const history = useHistory();
   const [myData, setMyData] = useState([]);
@@ -13,7 +14,7 @@ function MyPage() {
   const currentToken = sessionStorage.getItem("ACCESS_TOKEN");
 
   React.useEffect(() => {
-    fetch(`http://172.30.1.48:8000/community/users/${myPageInfo.avatarId}/profile`, {
+    fetch(`${MY_PAGE}${myPageInfo.avatarId}/profile`, {
       method: "GET",
       headers: {
         Authorization: currentToken,
@@ -24,7 +25,7 @@ function MyPage() {
   }, []);
 
   React.useEffect(() => {
-    fetch(`http://172.30.1.48:8000/community/users/${myPageInfo.avatarId}/profile`, {
+    fetch(`${MY_PAGE}${myPageInfo.avatarId}/profile`, {
       method: "GET",
       headers: {
         Authorization: currentToken,
@@ -83,7 +84,7 @@ const MyPageWrapper = styled.div`
   max-width: 1280px;
   min-width: 1030px;
   margin: 0 auto;
-  height: 100%;
+  /* height: 100%; */
   padding: 1em 1em;
 `;
 const MyPageTop = styled.div`
@@ -169,6 +170,6 @@ const MyPageMainTitle = styled.div`
   font-weight: 300;
 `;
 const MyPageMainPost = styled.div`
-  height: 3em;
+  height: auto;
   border-bottom: 1px solid lightgrey;
 `;
