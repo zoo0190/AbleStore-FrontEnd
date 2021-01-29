@@ -12,12 +12,12 @@ const CatListCard = ({ cardData, fromMyPage }) => {
   };
   // console.log(cardData);
   const goToUserPage = () => {
-    if(cardData.comment_number === 0){
+    if (cardData.comment_number === 0) {
       history.push(`/user/${cardData.user_id}/profile/topic`);
     } else {
       history.push(`/user/${cardData.coment_last.user_id}/profile/topic`);
     }
-  }
+  };
   return (
     <CatListCardWrapper>
       <CardLeft>
@@ -27,7 +27,7 @@ const CatListCard = ({ cardData, fromMyPage }) => {
           {cardData.tags.map((el, id) => {
             return <LftBtmTags key={id}>{el.name}</LftBtmTags>;
           })}
-          <LftBtmAuthor>By {cardData.user_nickname}</LftBtmAuthor>
+          {!fromMyPage ? <LftBtmAuthor>By {cardData.user_nickname}</LftBtmAuthor> : <LftBtmAuthor></LftBtmAuthor>}
           <LftBtmRightView> {cardData.hit} Views</LftBtmRightView>
           <LftBtmRightReply> {cardData.comment_number} Replies</LftBtmRightReply>
           <LftBtmRightLike> {cardData.like} Likes</LftBtmRightLike>
