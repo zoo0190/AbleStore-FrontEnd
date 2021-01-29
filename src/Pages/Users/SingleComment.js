@@ -52,7 +52,7 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId, userDa
 
   const handleOk = async () => {
     setIsModalVisible(false);
-    console.log(comment);
+
     const commentId = {
       comment_id: comment.id,
     };

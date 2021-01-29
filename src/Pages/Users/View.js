@@ -41,7 +41,6 @@ function View({ userData, commentUserData, boardId, categoryId, likeData, setRef
   };
 
   const { title, content, nickname, code, created_at, tags } = userData;
-  console.log(userData.nickname, NICKNAME);
 
   const menu = (
     <Menu>

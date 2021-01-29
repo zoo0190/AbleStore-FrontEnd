@@ -61,8 +61,6 @@ function BoardDetail() {
     getUserCommentData();
   }, [refreshComment]);
 
-  console.log(userData.topic);
-
   return (
     <>
       <HeaderNav />

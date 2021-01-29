@@ -24,7 +24,7 @@ const tailLayout = {
 };
 
 function EditUser() {
-  const TOKEN = sessionStorage.getItem("ACCESS_TOKEN")
+  const TOKEN = sessionStorage.getItem("ACCESS_TOKEN");
 
   let histroy = useHistory();
   const { categoryId, boardId } = useParams();
@@ -99,7 +99,6 @@ function EditUser() {
 
   const { title, content, topic, tags } = user;
 
-  console.log(typeof aa);
   return (
     <>
       <HeaderNav />
