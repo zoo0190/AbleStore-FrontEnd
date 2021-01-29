@@ -9,7 +9,7 @@ import { BOARD_USER_API } from "../../Enum";
 
 function View({ userData, commentUserData, boardId, categoryId, likeData, setRefreshLike }) {
   const TOKEN = sessionStorage.getItem("ACCESS_TOKEN");
-
+  const NICKNAME = sessionStorage.getItem("USER_NICKNAME");
   let history = useHistory();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -41,6 +41,7 @@ function View({ userData, commentUserData, boardId, categoryId, likeData, setRef
   };
 
   const { title, content, nickname, code, created_at, tags } = userData;
+  console.log(userData.nickname, NICKNAME);
 
   const menu = (
     <Menu>
@@ -99,24 +100,26 @@ function View({ userData, commentUserData, boardId, categoryId, likeData, setRef
       <Content>
         <ContentHeader>
           <UserInfo>
-            <div>
-              <span>
-                <SpanOne>{nickname?.split("")[0]} </SpanOne> {nickname}
-              </span>
+            <div className="userInfo">
+              <span className="nickname">{nickname?.split("")[0]} </span> {nickname}
               <span>@{code}</span>
             </div>
-            <div>
-              <span className="year">{created_at?.split("T")[0]}</span>
+            <div className="year">
+              <span>{created_at?.split("T")[0]}</span>
             </div>
           </UserInfo>
           <UserSet>
             <Li>{commentUserData.length} Replies</Li>
             <Li> {userData.hit} Views</Li>
-            <Dropdown overlay={menu}>
-              <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-                <DashOutlined />
-              </a>
-            </Dropdown>
+            <Li>
+              {userData.nickname === NICKNAME && (
+                <Dropdown overlay={menu}>
+                  <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+                    <DashOutlined />
+                  </a>
+                </Dropdown>
+              )}
+            </Li>
           </UserSet>
         </ContentHeader>
         <ContentBody>{content}</ContentBody>
@@ -156,18 +159,21 @@ const UserSet = styled.ul`
 `;
 
 const Li = styled.li`
-  padding-right: 30px;
+  margin-left: 20px;
 `;
 
 const UserInfo = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  .year {
-    display: block;
-    margin-top: 12px;
-    margin-left: 45px;
+  margin: 10px 0;
+  .userInfo {
+    margin-bottom: 20px;
+  }
+  .nickname {
+    padding: 12px;
+    border-radius: 50%;
+    border: 1px solid #dadada;
+    background-color: #dadada;
+    color: #fff;
+    font-weight: 700;
   }
 `;
 
@@ -175,11 +181,4 @@ const ContentBody = styled.div`
   margin-top: 20px;
   width: 650px;
   height: 350px;
-`;
-const SpanOne = styled.span`
-  display: inline-block;
-  padding: 12px;
-  background-color: #dadada;
-  border-radius: 50%;
-  color: #fff;
 `;

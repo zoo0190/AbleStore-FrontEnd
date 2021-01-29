@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Comment, Avatar, Button, Input, Menu, Dropdown, Modal, Tag } from "antd";
 import axios from "axios";
 import styled from "styled-components";
 import { DashOutlined } from "@ant-design/icons";
 import { SOLUTION_API, BOARD_USER_API, REPLY_API } from "../../Enum";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
-function SingleComment({ comment, boardId, setRefreshComment, categoryId }) {
+function SingleComment({ comment, boardId, setRefreshComment, categoryId, userData }) {
   const TOKEN = sessionStorage.getItem("ACCESS_TOKEN");
+  const nickName = sessionStorage.getItem("USER_NICKNAME");
   const [OpenReply, setOpenReply] = useState(false);
   const [commentVaule, setCommentValue] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [checkdSolution, setCheckedSolution] = useState(false);
   const { CheckableTag } = Tag;
+  const [solution, setSolution] = useState(true);
   const history = useHistory();
 
   const onSubmit = (event) => {
@@ -50,6 +52,7 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId }) {
 
   const handleOk = async () => {
     setIsModalVisible(false);
+    console.log(comment);
     const commentId = {
       comment_id: comment.id,
     };
@@ -75,6 +78,7 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId }) {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+
   const menu = () => {
     return (
       <Menu>
@@ -101,11 +105,11 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId }) {
       </Menu>
     );
   };
-  const nickName = sessionStorage.getItem("USER_NICKNAME");
 
-  const changeChecked = async () => {
+  const changeChecked = async (e) => {
     setCheckedSolution(true);
-    if (checkdSolution === false) {
+
+    if (+e.target.id === +comment.id) {
       fetch(`${SOLUTION_API}/${boardId}/comments/${comment.id}`, {
         headers: {
           Authorization: TOKEN,
@@ -120,7 +124,7 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId }) {
       console.log("end");
     }
   };
-
+  console.log(comment.solution);
   return (
     <CommentContainer>
       <CommentInfo>
@@ -134,20 +138,24 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId }) {
               backgroundColor: "#dadada",
             }}
           >
-            {nickName?.split("")[0]}{" "}
+            {comment.nickname?.split("")[0]}{" "}
           </span>
           <span>{comment.nickname}</span>
           <span>@{comment.code}</span>
           <span>{comment.created_at?.split("T")[0]}</span>
         </div>
         <div>
-          {nickName !== comment.nickname && (
-            <CheckableTag onClick={changeChecked} checked={checkdSolution}>
+          {nickName !== comment.nickname && TOKEN && userData.topic === "Question" && (
+            <CheckableTag
+              id={comment.id}
+              onClick={changeChecked}
+              checked={comment.solution || checkdSolution ? true : false}
+            >
               Solution
             </CheckableTag>
           )}
 
-          {nickName === comment.nickname && (
+          {nickName === comment.nickname && TOKEN && (
             <Dropdown overlay={menu}>
               <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
                 <DashOutlined />

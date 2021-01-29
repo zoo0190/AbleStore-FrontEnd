@@ -5,7 +5,7 @@ import SingleComment from "./SingleComment";
 import CommentReply from "./CommentReply";
 import styled from "styled-components";
 
-function CommentView({ boardId, categoryId, setRefreshComment, setRfresh, commentUserData }) {
+function CommentView({ boardId, categoryId, setRefreshComment, userData, commentUserData }) {
   const TOKEN = sessionStorage.getItem("ACCESS_TOKEN");
 
   return (
@@ -23,6 +23,7 @@ function CommentView({ boardId, categoryId, setRefreshComment, setRfresh, commen
                   reply={comment.reply}
                   parentCommentId={comment.id}
                   categoryId={categoryId}
+                  userData={userData}
                 />
                 <CommentReply
                   parentCommentId={comment.id}

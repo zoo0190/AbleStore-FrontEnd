@@ -26,6 +26,7 @@ export const COUNTRY = {
     },
   ],
 };
+
 var LOCAL_HOST = "http://172.30.1.37:8000";
 
 export const SIGN_UP_API = `${LOCAL_HOST}/user/signup`;

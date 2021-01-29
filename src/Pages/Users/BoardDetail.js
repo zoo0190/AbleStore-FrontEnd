@@ -41,7 +41,7 @@ function BoardDetail() {
   };
 
   const getUserCommentData = async () => {
-    const result = await axios.get(`http://172.30.1.37:8000/community/boards/${boardId}/comments`);
+    const result = await axios.get(`${BOARD_USER_API}/community/boards/${boardId}/comments`);
     setCommentUserData(result.data.CONTEXT);
   };
 
@@ -61,6 +61,8 @@ function BoardDetail() {
     getUserCommentData();
   }, [refreshComment]);
 
+  console.log(userData.topic);
+
   return (
     <>
       <HeaderNav />
@@ -79,6 +81,7 @@ function BoardDetail() {
           categoryId={categoryId}
           setRefreshComment={setRefreshComment}
           boardId={boardId}
+          userData={userData}
           commentUserData={commentUserData}
         />
       </DetailContainer>

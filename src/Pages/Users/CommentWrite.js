@@ -2,9 +2,9 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { BOARD_USER_API } from "../../Enum";
+
 function CommentWrite({ boardId, categoryId, setRefreshComment }) {
   const TOKEN = sessionStorage.getItem("ACCESS_TOKEN");
-
   const [commentValue, setCommentValue] = useState("");
 
   const handleClick = (event) => {
@@ -18,7 +18,7 @@ function CommentWrite({ boardId, categoryId, setRefreshComment }) {
       content: commentValue,
     };
 
-    fetch(`http://172.30.1.37:8000/community/boards/${boardId}/comments`, {
+    fetch(`${BOARD_USER_API}/community/boards/${boardId}/comments`, {
       headers: {
         Authorization: TOKEN,
       },
