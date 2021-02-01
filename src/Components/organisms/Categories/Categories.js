@@ -49,7 +49,7 @@ const Categories = () => {
 
   return (
     <>
-      <SectionTitle />
+      <SectionTitle title="Categories" />
       <CategoriesItemInfo goToCategory={goToCategory} categoriesInfo={CATEGORIES_INFO} />
       <CategoriesItemInfoSub goToCategory={goToCategory} categoriesInfo={CATEGORIES_INFO_SUB} />
     </>

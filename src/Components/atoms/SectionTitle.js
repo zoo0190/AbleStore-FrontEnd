@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const SectionTitle = (props) => <Title>Categories</Title>;
+const SectionTitle = ({ title }) => <Title>{title}</Title>;
 
 export default SectionTitle;
 
