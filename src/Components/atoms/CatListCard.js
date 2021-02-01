@@ -87,8 +87,7 @@ const LeftMiddle = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  /* number of lines to show */
-  -webkit-line-clamp: 1;
+  -webkit-line-clamp: 1; /* number of lines to show */
   -webkit-box-orient: vertical;
   margin-bottom: 0.4em;
   font-size: 0.9em;
@@ -98,11 +97,16 @@ const LeftMiddleImg = styled.div`
   overflow: hidden;
   display: -webkit-box;
   text-overflow: ellipsis;
-  -webkit-line-clamp: 1;
-  /* number of lines to show */
+  -webkit-line-clamp: 1; /* number of lines to show */
   -webkit-box-orient: vertical;
   margin-bottom: 0.4em;
   font-size: 0.9em;
+  
+  img {
+    overflow: hidden;
+    max-height: 30px;
+    max-width: 30px;
+  }
 `;
 const LeftBottom = styled.div`
   display: flex;
