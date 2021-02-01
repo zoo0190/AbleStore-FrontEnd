@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
@@ -6,6 +7,8 @@ import { Menu, Dropdown, Tag, Modal, Button, Breadcrumb } from "antd";
 import { DashOutlined } from "@ant-design/icons";
 import LikeDisLike from "./LikeDisLike";
 import { BOARD_USER_API } from "../../Enum";
+
+const { CheckableTag } = Tag;
 
 function View({ userData, commentUserData, boardId, categoryId, likeData, setRefreshLike }) {
   const TOKEN = sessionStorage.getItem("ACCESS_TOKEN");
@@ -67,15 +70,20 @@ function View({ userData, commentUserData, boardId, categoryId, likeData, setRef
 
       <Menu.Item>
         <Button onClick={gotoEdit} style={{ border: "none" }}>
-          report
+          Report
         </Button>
       </Menu.Item>
     </Menu>
   );
+
   const goToPrev = () => {
     history.push(`/forum/${categoryId}`);
   };
   const htmlCode = content;
+
+  const result = commentUserData?.filter((e) => {
+    return e.solution === true;
+  });
 
   return (
     <ViewContainer>
@@ -92,26 +100,29 @@ function View({ userData, commentUserData, boardId, categoryId, likeData, setRef
       </Breadcrumb>
       <Header>
         {tags?.map((tag) => {
-          return (
-            <Tag
-              style={{
-                borderRadius: "5px",
-                padding: "2px 8px",
-                fontSize: "12px",
-                lineHeight: "18px",
-                marginRight: "5px",
-                marginBottom: "5px",
-                color: "#4c5861",
-                backgroundColor: "#fff",
-                border: "1px solid #4c5861",
-                verticalAlign: "middle",
-                display: "inline-block",
-              }}
-            >
-              {tag}
-            </Tag>
-          );
+          {
+            return (
+              <Tag
+                style={{
+                  borderRadius: "5px",
+                  padding: "2px 8px",
+                  fontSize: "12px",
+                  lineHeight: "18px",
+                  marginRight: "5px",
+                  marginBottom: "5px",
+                  color: "#4c5861",
+                  backgroundColor: "#fff",
+                  border: "1px solid #4c5861",
+                  verticalAlign: "middle",
+                  display: "inline-block",
+                }}
+              >
+                {tag}
+              </Tag>
+            );
+          }
         })}
+        {result[0]?.solution ? <CheckableTag checked={true}>Solution</CheckableTag> : ""}
         <TitleContainer>
           <Title>{title}</Title>
           <LikeDisLike
@@ -162,7 +173,9 @@ function View({ userData, commentUserData, boardId, categoryId, likeData, setRef
 
 export default View;
 
-const ViewContainer = styled.div``;
+const ViewContainer = styled.div`
+  margin-bottom: 100px;
+`;
 const Header = styled.header`
   margin-bottom: 20px;
 `;

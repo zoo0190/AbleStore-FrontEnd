@@ -153,12 +153,6 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId, userDa
       onSubmit(e);
     }
   };
-  const GetSolution = () => {
-    if (checkdSolution) {
-      return comment.solution ? "Solution" : "";
-    }
-    return userData.nickname !== comment.nickname ? "Solution" : "";
-  };
 
   return (
     <CommentContainer>
@@ -191,7 +185,7 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId, userDa
               onClick={changeChecked}
               checked={comment.solution || checkdSolution ? true : false}
             >
-              {userData.nickname !== comment.nickname ? "Solution" : ""}
+              {nickName !== comment.nickname ? "Solution" : ""}
             </CheckableTag>
           )}
 
