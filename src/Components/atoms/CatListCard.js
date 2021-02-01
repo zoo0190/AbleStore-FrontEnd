@@ -101,7 +101,7 @@ const LeftMiddleImg = styled.div`
   -webkit-box-orient: vertical;
   margin-bottom: 0.4em;
   font-size: 0.9em;
-  
+
   img {
     overflow: hidden;
     max-height: 30px;

@@ -3,10 +3,9 @@ import { Tooltip } from "antd";
 import { LikeOutlined } from "@ant-design/icons";
 import { LIKE_API } from "../../Enum";
 
-
 function LikeDisLike({ likeData, boardId, setRefreshLike }) {
   const [likeAction, setLikeAction] = useState("");
-  const TOKEN = sessionStorage.getItem("ACCESS_TOKEN")
+  const TOKEN = sessionStorage.getItem("ACCESS_TOKEN");
 
   const onLike = () => {
     fetch(`${LIKE_API}/community/boards/${boardId}/likes`, {

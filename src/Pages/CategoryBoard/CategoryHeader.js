@@ -12,4 +12,5 @@ const Header = styled.div`
   text-align: center;
   font-size: 32px;
   font-weight: 700;
+  color: #4c5861;
 `;
