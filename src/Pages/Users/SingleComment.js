@@ -166,12 +166,16 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId, userDa
         <div style={{ display: "flex", alignItems: "center" }}>
           <span
             style={{
-              display: "inline-block",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
               marginRight: "10px",
               borderRadius: "50%",
-              padding: "12px",
+              width: "40px",
+              height: "40px",
               backgroundColor: "rgb(183, 194, 206)",
               color: "#fff",
+              padding: "0",
             }}
           >
             {comment.nickname?.split("")[0]}
@@ -200,7 +204,7 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId, userDa
           )}
         </div>
       </CommentInfo>
-      <Comment actions={actions} content={<p>{comment.content}</p>} />
+      <Comment actions={actions} style={{ lineHeight: "1.4" }} content={<p>{comment.content}</p>} />
 
       {OpenReply && (
         <form style={{ display: "flex", justifyContent: "space-between" }} onSubmit={onSubmit}>

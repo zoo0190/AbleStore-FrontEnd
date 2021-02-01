@@ -200,10 +200,13 @@ const UserInfo = styled.div`
   align-items: center;
 
   .nickname {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 50%;
     background-color: rgb(183, 194, 206);
-    padding: 12px;
+    width: 40px;
+    height: 40px;
     margin-right: 10px;
     color: #fff;
   }
