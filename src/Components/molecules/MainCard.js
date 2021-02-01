@@ -129,6 +129,7 @@ const Description = styled.p`
   line-height: 1.3em;
   font-weight: 400;
   color: #4c5861;
+  width: 998px;
 `;
 
 const Info = styled.div``;

@@ -35,19 +35,42 @@ function CommentWrite({ boardId, categoryId, setRefreshComment }) {
   };
 
   return (
-    <div>
+    <div style={{ marginBottom: "100px" }}>
       <br />
       <p> Replies </p>
-      <hr />
-      <form style={{ display: "flex" }} onSubmit={onSubmit}>
+      <hr style={{ border: "1px solid #d7dfe6" }} />
+      <form style={{ display: "flex", justifyContent: "space-between" }} onSubmit={onSubmit}>
         <textarea
-          style={{ width: "100%", borderRadius: "5px" }}
+          style={{
+            width: "100%",
+            display: "block",
+            padding: "0.6rem 1rem",
+            fontSize: "1rem",
+            lineHeight: "1.5",
+            color: "#4c5861",
+            backgroundColor: "#fff",
+            backgroundClip: "padding-box",
+            border: "1px solid #d7dfe6",
+            borderRadius: "5px",
+            resize: "none",
+          }}
           onChange={handleClick}
           value={commentValue}
           placeholder="코멘트를 작성해 주세요"
           onKeyPress={onKeyPress}
         ></textarea>
-        <button style={{ width: "20%", height: "52px", borderRadius: "5px" }} onClick={onSubmit}>
+        <button
+          style={{
+            padding: "0.5rem 3rem",
+            borderRadius: "3px",
+            backgroundColor: "#0067e6",
+            border: "1px solid transparent",
+            lineHeight: "1.5",
+            borderColor: "#0067e6",
+            color: "#fff",
+          }}
+          onClick={onSubmit}
+        >
           Submit
         </button>
       </form>

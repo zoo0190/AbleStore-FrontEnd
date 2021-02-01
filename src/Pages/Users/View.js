@@ -79,32 +79,62 @@ function View({ userData, commentUserData, boardId, categoryId, likeData, setRef
 
   return (
     <ViewContainer>
-      <Breadcrumb separator=">">
-        <Breadcrumb.Item>
-          <Link to="/">Home</Link>
+      <Breadcrumb separator=">" style={{ marginTop: "45px", marginBottom: "25px" }}>
+        <Breadcrumb.Item style={{ cursor: "pointer" }}>
+          <Link to="/" style={{ color: "4c5861", fontSize: "12px" }}>
+            Home
+          </Link>
         </Breadcrumb.Item>
         <Breadcrumb.Item style={{ cursor: "pointer" }} onClick={goToPrev}>
-          <Link> Nas</Link>
+          <Link style={{ color: "4c5861", fontSize: "12px" }}> Nas</Link>
         </Breadcrumb.Item>
         <Breadcrumb.Item>{userData.title}</Breadcrumb.Item>
       </Breadcrumb>
       <Header>
         {tags?.map((tag) => {
-          return <Tag>{tag}</Tag>;
+          return (
+            <Tag
+              style={{
+                borderRadius: "5px",
+                padding: "2px 8px",
+                fontSize: "12px",
+                lineHeight: "18px",
+                marginRight: "5px",
+                marginBottom: "5px",
+                color: "#4c5861",
+                backgroundColor: "#fff",
+                border: "1px solid #4c5861",
+                verticalAlign: "middle",
+                display: "inline-block",
+              }}
+            >
+              {tag}
+            </Tag>
+          );
         })}
         <TitleContainer>
           <Title>{title}</Title>
-          <LikeDisLike boardId={boardId} categoryId={categoryId} likeData={likeData} setRefreshLike={setRefreshLike} />
+          <LikeDisLike
+            style={{ width: "50px" }}
+            boardId={boardId}
+            categoryId={categoryId}
+            likeData={likeData}
+            setRefreshLike={setRefreshLike}
+          />
         </TitleContainer>
       </Header>
       <Content>
         <ContentHeader>
           <UserInfo>
             <div className="userInfo">
-              <span className="nickname">{nickname?.split("")[0]} </span> {nickname}
-              <span>@{code}</span>
+              <span className="nickname">{nickname?.split("")[0]} </span>
             </div>
             <div className="year">
+              <span>
+                <span style={{ fontWeight: "900" }}>{nickname} </span>
+                <span>@{code}</span>
+              </span>
+
               <span>{created_at?.split("T")[0]}</span>
             </div>
           </UserInfo>
@@ -133,29 +163,29 @@ function View({ userData, commentUserData, boardId, categoryId, likeData, setRef
 export default View;
 
 const ViewContainer = styled.div`
-  width: 1200px;
-  margin: 50px auto;
-  height: 600px;
-  overflow-y: auto;
+  height: 650px;
 `;
 const Header = styled.header`
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 `;
 const TitleContainer = styled.div`
   display: flex;
-  justify-content: space-between;
 `;
 const Title = styled.div`
   font-weight: 600;
   color: #000;
+  margin: 3px auto 0;
   font-size: 24px;
   line-height: 34px;
+  width: calc(100% - 50px);
 `;
-const Like = styled.div``;
+
 const Content = styled.div``;
 const ContentHeader = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 `;
 const UserSet = styled.ul`
   display: flex;
@@ -166,17 +196,23 @@ const Li = styled.li`
 `;
 
 const UserInfo = styled.div`
-  margin: 10px 0;
-  .userInfo {
-    margin-bottom: 20px;
-  }
+  display: flex;
+  align-items: center;
+
   .nickname {
-    padding: 12px;
+    display: inline-block;
     border-radius: 50%;
-    border: 1px solid #dadada;
-    background-color: #dadada;
+    background-color: rgb(183, 194, 206);
+    padding: 12px;
+    margin-right: 10px;
     color: #fff;
-    font-weight: 700;
+  }
+
+  .year {
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.4;
   }
 `;
 

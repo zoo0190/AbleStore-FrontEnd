@@ -60,8 +60,6 @@ function EditUser() {
   }, []);
 
   const onFinish = async (values) => {
-    console.log(values);
-
     const editData = {
       ...values,
       Topic: values.Topic,
@@ -163,11 +161,11 @@ function EditUser() {
           </Form.Item>
 
           <Form.Item {...tailLayout}>
-            <Button htmlType="button" onClick={onBack}>
+            <Button style={{ borderRadius: "3px" }} htmlType="button" onClick={onBack}>
               Back
             </Button>
 
-            <Button type="primary" htmlType="submit">
+            <Button style={{ marginLeft: "10px", borderRadius: "3px" }} type="primary" htmlType="submit">
               Update
             </Button>
           </Form.Item>
@@ -190,4 +188,7 @@ const Title = styled.div`
   margin-bottom: 30px;
   font-size: 32px;
   font-weight: 700;
+  h1 {
+    color: #4c5861;
+  }
 `;

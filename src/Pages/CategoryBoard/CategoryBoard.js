@@ -33,7 +33,7 @@ const CategoryBoard = ({ setInputData, inputData }) => {
     const html = editorRef.current.editor.root.innerHTML;
     setInputData(html);
   };
-
+  console.log(inputData);
   return (
     <>
       <ReactQuill ref={editorRef} modules={editorConfig} theme="snow" value={inputData} onChange={handleOnChange} />

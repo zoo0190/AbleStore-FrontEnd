@@ -63,7 +63,7 @@ export default CatListCard;
 
 const CatListCardWrapper = styled.div`
   display: flex;
-  width: 100%;
+  width: 998px;
   height: 8em;
 `;
 

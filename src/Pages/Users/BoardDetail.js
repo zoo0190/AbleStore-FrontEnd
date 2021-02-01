@@ -18,7 +18,7 @@ function BoardDetail() {
   const [refreshComment, setRefreshComment] = useState("");
 
   const { y } = useWindowScroll();
-  const scrollTop = () => window.scrollTo({ top: 0 });
+  const scrollTop = () => window.scrollTo({ top: 100 });
 
   useEffect(() => {
     if (y > 100) {
@@ -92,6 +92,6 @@ function BoardDetail() {
 export default BoardDetail;
 
 const DetailContainer = styled.div`
-  width: 1200px;
-  margin: 50px auto;
+  width: 1280px;
+  margin: 0 auto;
 `;

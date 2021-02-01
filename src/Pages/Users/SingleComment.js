@@ -92,12 +92,15 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId, userDa
 
   const showModal = () => {
     setIsModalVisible(true);
+    console.log("showModal");
   };
 
   const handleCancel = () => {
+    console.log("handleCancel");
     setIsModalVisible(false);
   };
 
+  console.log("hi");
   const menu = () => {
     return (
       <Menu>
@@ -160,21 +163,22 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId, userDa
   return (
     <CommentContainer>
       <CommentInfo>
-        <div>
+        <div style={{ display: "flex", alignItems: "center" }}>
           <span
             style={{
               display: "inline-block",
               marginRight: "10px",
               borderRadius: "50%",
               padding: "12px",
-              backgroundColor: "#dadada",
+              backgroundColor: "rgb(183, 194, 206)",
+              color: "#fff",
             }}
           >
-            {comment.nickname?.split("")[0]}{" "}
+            {comment.nickname?.split("")[0]}
           </span>
-          <span>{comment?.nickname}</span>
-          <span>@{comment?.code}</span>
-          <span>{comment.created_at?.split("T")[0]}</span>
+          <span style={{ fontSize: "12px", fontWeight: "900" }}>{comment?.nickname}</span>
+          <span style={{ fontSize: "12px" }}>@{comment?.code}</span>
+          <span style={{ fontSize: "12px" }}>{comment.created_at?.split("T")[0]}</span>
         </div>
         <div>
           {nickName === userData?.nickname && TOKEN && userData?.topic === "Question" && (
@@ -199,15 +203,39 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId, userDa
       <Comment actions={actions} content={<p>{comment.content}</p>} />
 
       {OpenReply && (
-        <form style={{ display: "flex" }} onSubmit={onSubmit}>
+        <form style={{ display: "flex", justifyContent: "space-between" }} onSubmit={onSubmit}>
           <textarea
-            style={{ width: "100%", borderRadius: "5px" }}
+            style={{
+              width: "100%",
+              display: "block",
+              padding: "0.6rem 1rem",
+              fontSize: "1rem",
+              lineHeight: "1.5",
+              color: "#4c5861",
+              backgroundColor: "#fff",
+              backgroundClip: "padding-box",
+              border: "1px solid #d7dfe6",
+              borderRadius: "5px",
+              resize: "none",
+            }}
             onChange={onHadleChange}
             value={commentVaule}
             placeholder="코멘트 작성해 주세요"
             onKeyPress={onKeyPress}
           ></textarea>
-          <button type="submit" style={{ width: "20%", height: "52px", borderRadius: "5px" }} onClick>
+          <button
+            type="submit"
+            style={{
+              padding: "0.5rem 3rem",
+              borderRadius: "3px",
+              backgroundColor: "#0067e6",
+              border: "1px solid transparent",
+              lineHeight: "1.5",
+              borderColor: "#0067e6",
+              color: "#fff",
+            }}
+            onClick
+          >
             Submit
           </button>
         </form>
@@ -219,9 +247,10 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId, userDa
 export default SingleComment;
 
 const CommentContainer = styled.div`
-  margin-bottom: 10px;
-  border: 1px solid #dddddd;
-  padding: 10px;
+  margin: 10px 0 0 0;
+  padding: 20px;
+  border: 1px solid #d6dfe6;
+  border-radius: 5px;
 `;
 
 const CommentInfo = styled.div`

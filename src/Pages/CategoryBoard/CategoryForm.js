@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Form, Input, Button, Select, Tag } from "antd";
+import { Form, Input, Button, Select, Tag, BackTop } from "antd";
 import "antd/dist/antd.css";
 import CategoryBoard from "./CategoryBoard";
 import axios from "axios";
@@ -19,7 +19,7 @@ const layout = {
 const tailLayout = {
   wrapperCol: {
     offset: 10,
-    span: 7,
+    span: 5,
   },
 };
 
@@ -121,11 +121,11 @@ function CategoryForm() {
       </Form.Item>
 
       <Form.Item {...tailLayout}>
-        <Button htmlType="button" onClick={onBack}>
+        <Button style={{ borderRadius: "3px" }} htmlType="button" onClick={onBack}>
           Back
         </Button>
 
-        <Button type="primary" htmlType="submit">
+        <Button style={{ marginLeft: "10px", borderRadius: "3px" }} type="primary" htmlType="submit">
           Submit
         </Button>
       </Form.Item>
