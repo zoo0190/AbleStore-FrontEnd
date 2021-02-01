@@ -163,7 +163,6 @@ function View({ userData, commentUserData, boardId, categoryId, likeData, setRef
 export default View;
 
 const ViewContainer = styled.div`
-  height: 650px;
 `;
 const Header = styled.header`
   margin-bottom: 20px;
