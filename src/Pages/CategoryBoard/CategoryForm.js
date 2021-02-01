@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Form, Input, Button, Select, Tag, Alert } from "antd";
+import { Form, Input, Button, Select, Tag } from "antd";
 import "antd/dist/antd.css";
 import CategoryBoard from "./CategoryBoard";
 import axios from "axios";
@@ -22,28 +22,35 @@ const tailLayout = {
     span: 7,
   },
 };
-// console.log(TOKEN);
+
 function CategoryForm() {
-  const TOKEN = sessionStorage.getItem("ACCESS_TOKEN")
+  const TOKEN = sessionStorage.getItem("ACCESS_TOKEN");
 
   const [tagData, setTagData] = useState([]);
   const [topicData, setTopicData] = useState([]);
   const [inputData, setInputData] = useState("");
   const history = useHistory();
   useEffect(() => {
-    fetch("http://localhost:3000/data/postData.json")
+    fetch(`${window.location.origin}/data/postData.json`)
       .then((res) => res.json())
       .then((res) => {
         const { topic, tags } = res.data;
         setTagData(tags.items);
         setTopicData(topic.items);
-        console.log(res.data);
       });
   }, []);
 
   const onFinish = (values) => {
-    const newData = inputData.indexOf("</p>");
-    console.log(values);
+    // const newData = inputData.indexOf("</p>");
+    // const Data = {
+    //   Topic: values.Topic,
+    //   Title: values.Title,
+    //   Content: inputData,
+    //   Image: "",
+    //   Tags: values.Tags.join(","),
+    // };
+    // console.log(Data);
+
     const requestOptions = {
       method: "POST",
       headers: {
@@ -52,7 +59,7 @@ function CategoryForm() {
       body: JSON.stringify({
         Topic: values.Topic,
         Title: values.Title,
-        Content: inputData.substring(3, newData),
+        Content: inputData,
         Image: "",
         Tags: values.Tags.join(","),
       }),
@@ -110,7 +117,7 @@ function CategoryForm() {
       )}
 
       <Form.Item name="Content" label="Content">
-        <CategoryBoard setInputData={setInputData} />
+        <CategoryBoard setInputData={setInputData} inputData={inputData} />
       </Form.Item>
 
       <Form.Item {...tailLayout}>

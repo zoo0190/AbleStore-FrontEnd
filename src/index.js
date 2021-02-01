@@ -6,7 +6,7 @@ import { createStore } from "redux";
 import rootReducer from "./Store/Reducers/index";
 import GlobalStyle from "./Styles/GlobalStyles";
 import { ThemeProvider } from "styled-components";
-import Theme from "./Styles/theme";
+import Theme from "./Styles/Theme";
 
 const store = createStore(rootReducer);
 

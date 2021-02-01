@@ -28,6 +28,11 @@ function CommentWrite({ boardId, categoryId, setRefreshComment }) {
       .then((res) => res.json())
       .then((res) => setRefreshComment(res));
   };
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onSubmit(e);
+    }
+  };
 
   return (
     <div>
@@ -40,8 +45,9 @@ function CommentWrite({ boardId, categoryId, setRefreshComment }) {
           onChange={handleClick}
           value={commentValue}
           placeholder="코멘트를 작성해 주세요"
+          onKeyPress={onKeyPress}
         ></textarea>
-        <button style={{ width: "20%", height: "52px" }} onClick={onSubmit}>
+        <button style={{ width: "20%", height: "52px", borderRadius: "5px" }} onClick={onSubmit}>
           Submit
         </button>
       </form>

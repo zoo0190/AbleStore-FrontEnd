@@ -27,7 +27,7 @@ export const COUNTRY = {
   ],
 };
 
-var LOCAL_HOST = "http://172.30.1.37:8000";
+var LOCAL_HOST = "http://54.180.99.152:8000";
 
 export const SIGN_UP_API = `${LOCAL_HOST}/user/signup`;
 
@@ -37,12 +37,12 @@ export const CATEGORY_API = `${LOCAL_HOST}/community/categories/1/boards`;
 
 export const MY_PAGE = `${LOCAL_HOST}/community/users/`;
 
-export const SOLUTION_API = `http://172.30.1.37:8000/community/boards`;
+export const SOLUTION_API = `http://54.180.99.152:8000/community/boards`;
 
-export const REPLY_API = `http://172.30.1.37:8000/community/boards`;
+export const REPLY_API = `http://54.180.99.152:8000/community/boards`;
 
-export const BOARD_USER_API = "http://172.30.1.37:8000";
+export const BOARD_USER_API = "http://54.180.99.152:8000";
 
-export const LIKE_API = "http://172.30.1.37:8000";
+export const LIKE_API = "http://54.180.99.152:8000";
 
 // export const TOKEN = sessionStorage.getItem("ACCESS_TOKEN")

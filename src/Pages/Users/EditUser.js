@@ -7,6 +7,7 @@ import axios from "axios";
 import { BOARD_USER_API } from "../../Enum";
 import HeaderNav from "../../Components/Organisms/Header/Header";
 
+const formRef = React.createRef();
 const { Option } = Select;
 const layout = {
   labelCol: {
@@ -33,11 +34,13 @@ function EditUser() {
   const [inputData, setInputData] = useState("");
   const [user, setUser] = useState({});
   const [context, setContext] = useState([]);
+  const [fieldVaule, setFieldValue] = useState({});
+
   const formRef = useRef();
   const history = useHistory();
 
   useEffect(() => {
-    fetch("http://localhost:3000/data/postData.json")
+    fetch(`${window.location.origin}/data/postData.json`)
       .then((res) => res.json())
       .then((res) => {
         const { topic, tags } = res.data;
@@ -57,17 +60,17 @@ function EditUser() {
   }, []);
 
   const onFinish = async (values) => {
-    const newData = inputData.indexOf("</p>");
+    console.log(values);
 
     const editData = {
       ...values,
       Topic: values.Topic,
       Title: values.Title,
-      Content: inputData.substring(3, newData),
+      Content: inputData,
       Image: "",
       Tags: values.Tags?.join(","),
     };
-
+    console.log(editData);
     await axios
       .put(`${BOARD_USER_API}/community/categories/${categoryId}/boards/${boardId}`, editData, {
         headers: {
@@ -91,13 +94,18 @@ function EditUser() {
     },
   ];
 
+  useEffect(() => {
+    formRef.current.setFieldsValue({
+      username: "kim",
+    });
+  }, []);
+  const { title, content, topic, tags } = user;
+
   const formWrapper = (text, child) => (
     <Form.Item name={text} label={text} rules={options}>
       {child}
     </Form.Item>
   );
-
-  const { title, content, topic, tags } = user;
 
   return (
     <>
@@ -110,6 +118,7 @@ function EditUser() {
           size={"large"}
           initialValues={{
             remember: true,
+            name: user.topic,
           }}
           {...layout}
           ref={formRef}
@@ -118,20 +127,29 @@ function EditUser() {
         >
           {formWrapper(
             "Topic",
-            <Select defaultValue={topic}>
+            <Select name={user.topic} autoFocus={user.topic} value={user.topic}>
               {topicData.map((e) => (
-                <Option key={e.id} value={e.text}>
-                  <Tag>{e.text}</Tag>
-                </Option>
+                <>
+                  <Option value={topic} selected={topic} disabled hidden>
+                    {topic}
+                  </Option>
+                  <Option name={user.topic} defaultValue={user.topic} key={e.id} value={e.text}>
+                    <Tag>{e.text}</Tag>
+                  </Option>
+                </>
               ))}
             </Select>,
           )}
 
-          {formWrapper("Title", <Input type="text" value={title} defaultValue={title} />)}
+          {/* <Form.Item name={title} label="Title" rules={options}>
+            <Input type="text" defaultValue={title} />
+          </Form.Item> */}
+
+          {formWrapper("Title", <Input name={title} type="text" value={title} defaultValue={title} />)}
 
           {formWrapper(
             "Tags",
-            <Select mode="multiple" showArrow value={user.tags?.join("")} defaultValue={tags}>
+            <Select mode="multiple" showArrow value={user.tags?.join("")}>
               {tagData.map((e) => (
                 <Option key={e.id} value={e.text}>
                   <Tag>{e.text}</Tag>
@@ -141,7 +159,7 @@ function EditUser() {
           )}
 
           <Form.Item name="Content" label="Content">
-            <EditBoard setInputData={setInputData} content={content} />
+            <EditBoard setInputData={setInputData} content={content} inputData={inputData} />
           </Form.Item>
 
           <Form.Item {...tailLayout}>
@@ -164,6 +182,7 @@ export default EditUser;
 const EditUserContainer = styled.div`
   width: 1000px;
   margin: 0 auto;
+  margin-top: 60px;
 `;
 
 const Title = styled.div`

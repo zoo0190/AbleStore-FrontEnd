@@ -10,7 +10,7 @@ const CatListCard = ({ cardData, fromMyPage }) => {
     const { category_id, board_id } = cardData;
     history.push(`/boardDetail/${category_id}/${board_id}`);
   };
-  // console.log(cardData);
+
   const goToUserPage = () => {
     if (cardData.comment_number === 0) {
       history.push(`/user/${cardData.user_id}/profile/topic`);
@@ -18,11 +18,19 @@ const CatListCard = ({ cardData, fromMyPage }) => {
       history.push(`/user/${cardData.coment_last.user_id}/profile/topic`);
     }
   };
+  const htmlCode = cardData.content;
+
   return (
     <CatListCardWrapper>
       <CardLeft>
         <LeftTop onClick={postClick}>{cardData.title}</LeftTop>
-        <LeftMiddle>{cardData.comment_number === 0 ? cardData.content : cardData.coment_last.content}</LeftMiddle>
+        <LeftMiddle>
+          {cardData.comment_number === 0 ? (
+            <div dangerouslySetInnerHTML={{ __html: htmlCode }}></div>
+          ) : (
+            cardData.coment_last.content
+          )}
+        </LeftMiddle>
         <LeftBottom>
           {cardData.tags.map((el, id) => {
             return <LftBtmTags key={id}>{el.name}</LftBtmTags>;

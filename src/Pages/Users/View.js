@@ -75,6 +75,7 @@ function View({ userData, commentUserData, boardId, categoryId, likeData, setRef
   const goToPrev = () => {
     history.push(`/forum/${categoryId}`);
   };
+  const htmlCode = content;
 
   return (
     <ViewContainer>
@@ -121,7 +122,9 @@ function View({ userData, commentUserData, boardId, categoryId, likeData, setRef
             </Li>
           </UserSet>
         </ContentHeader>
-        <ContentBody>{content}</ContentBody>
+        <ContentBody>
+          <div dangerouslySetInnerHTML={{ __html: htmlCode }}></div>
+        </ContentBody>
       </Content>
     </ViewContainer>
   );
@@ -132,7 +135,8 @@ export default View;
 const ViewContainer = styled.div`
   width: 1200px;
   margin: 50px auto;
-  height: 400px;
+  height: 600px;
+  overflow-y: auto;
 `;
 const Header = styled.header`
   margin-bottom: 5px;
@@ -176,8 +180,4 @@ const UserInfo = styled.div`
   }
 `;
 
-const ContentBody = styled.div`
-  margin-top: 20px;
-  width: 650px;
-  height: 350px;
-`;
+const ContentBody = styled.div``;

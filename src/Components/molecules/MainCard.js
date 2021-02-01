@@ -17,6 +17,8 @@ const MainCard = ({ item, goToDetail, goToTags, goToProfile }) => {
     goToProfile(item);
   };
 
+  const htmlCode = item.content;
+
   return (
     <Container>
       <IconWrapper>
@@ -35,7 +37,13 @@ const MainCard = ({ item, goToDetail, goToTags, goToProfile }) => {
       </IconWrapper>
       <CardContentsWrapper>
         <Title onClick={handleClickDetail}>{item.title}</Title>
-        <Description>{item.coment_last.nickname ? item.coment_last.content : item.content}</Description>
+        <Description>
+          {item.coment_last.nickname ? (
+            item.coment_last.content
+          ) : (
+            <div dangerouslySetInnerHTML={{ __html: htmlCode }}></div>
+          )}
+        </Description>
         <Info>
           <Category>{item.category}</Category>
           {item.tags.map((tag, idx) => (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Comment, Avatar, Button, Input, Menu, Dropdown, Modal, Tag } from "antd";
 import axios from "axios";
 import styled from "styled-components";
@@ -12,17 +12,25 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId, userDa
   const [OpenReply, setOpenReply] = useState(false);
   const [commentVaule, setCommentValue] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [checkdSolution, setCheckedSolution] = useState(false);
+  const [checkdSolution, setCheckedSolution] = useState();
   const { CheckableTag } = Tag;
   const [solution, setSolution] = useState(true);
   const history = useHistory();
 
-  const onSubmit = (event) => {
+  const instance = axios.create({
+    baseURL: `${REPLY_API}`,
+    headers: {
+      Authorization: `${TOKEN}`,
+    },
+  });
+
+  const onSubmit = async (event) => {
     event.preventDefault();
     setCommentValue("");
     const commentData = {
       content: commentVaule,
     };
+
     fetch(`${REPLY_API}/${boardId}/comments/${comment.id}/comments`, {
       headers: {
         Authorization: TOKEN,
@@ -34,24 +42,34 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId, userDa
       .then((res) => setRefreshComment(res));
   };
 
-  const onHadleChange = (event) => {
-    setCommentValue(event.currentTarget.value);
-  };
+  const onHadleChange = useCallback(
+    (event) => {
+      setCommentValue(event.currentTarget.value);
+      console.log("onHandleChange");
+    },
+    [commentVaule],
+  );
 
   const onClickReplyOpen = () => {
     setOpenReply(!OpenReply);
+    console.log("onClick");
   };
 
   const actions = [
     <>
-      <span onClick={onClickReplyOpen} key="comment-basic-reply-to">
-        Reply to
-      </span>
+      {comment.reply ? (
+        ""
+      ) : (
+        <span onClick={onClickReplyOpen} key="comment-basic-reply-to">
+          Reply to
+        </span>
+      )}
     </>,
   ];
 
   const handleOk = async () => {
     setIsModalVisible(false);
+    console.log("handleok");
 
     const commentId = {
       comment_id: comment.id,
@@ -71,6 +89,7 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId, userDa
         }
       });
   };
+
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -118,13 +137,26 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId, userDa
       })
         .then((res) => res.json())
         .then((res) => {
-          console.log(res);
+          setRefreshComment(res);
         });
     } else {
       console.log("end");
     }
+    console.log("changeChecke");
   };
-  console.log(comment.solution);
+
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onSubmit(e);
+    }
+  };
+  const GetSolution = () => {
+    if (checkdSolution) {
+      return comment.solution ? "Solution" : "";
+    }
+    return userData.nickname !== comment.nickname ? "Solution" : "";
+  };
+
   return (
     <CommentContainer>
       <CommentInfo>
@@ -140,22 +172,22 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId, userDa
           >
             {comment.nickname?.split("")[0]}{" "}
           </span>
-          <span>{comment.nickname}</span>
-          <span>@{comment.code}</span>
+          <span>{comment?.nickname}</span>
+          <span>@{comment?.code}</span>
           <span>{comment.created_at?.split("T")[0]}</span>
         </div>
         <div>
-          {nickName !== comment.nickname && TOKEN && userData.topic === "Question" && (
+          {nickName === userData?.nickname && TOKEN && userData?.topic === "Question" && (
             <CheckableTag
               id={comment.id}
               onClick={changeChecked}
               checked={comment.solution || checkdSolution ? true : false}
             >
-              Solution
+              {userData.nickname !== comment.nickname ? "Solution" : ""}
             </CheckableTag>
           )}
 
-          {nickName === comment.nickname && TOKEN && (
+          {nickName === comment?.nickname && TOKEN && (
             <Dropdown overlay={menu}>
               <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
                 <DashOutlined />
@@ -173,8 +205,9 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId, userDa
             onChange={onHadleChange}
             value={commentVaule}
             placeholder="코멘트 작성해 주세요"
+            onKeyPress={onKeyPress}
           ></textarea>
-          <button style={{ width: "20%", height: "52px" }} onClick>
+          <button type="submit" style={{ width: "20%", height: "52px", borderRadius: "5px" }} onClick>
             Submit
           </button>
         </form>

@@ -9,7 +9,7 @@ function CommentView({ boardId, categoryId, setRefreshComment, userData, comment
   const TOKEN = sessionStorage.getItem("ACCESS_TOKEN");
 
   return (
-    <>
+    <CommentBody>
       {commentUserData &&
         commentUserData.map((comment, index) => {
           return (
@@ -39,8 +39,10 @@ function CommentView({ boardId, categoryId, setRefreshComment, userData, comment
         })}
 
       {TOKEN && <CommentWrite boardId={boardId} setRefreshComment={setRefreshComment} categoryId={categoryId} />}
-    </>
+    </CommentBody>
   );
 }
 
 export default CommentView;
+
+const CommentBody = styled.div``;
