@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Button, Breadcrumb } from "antd";
 
@@ -12,13 +12,17 @@ const CatListTop = () => {
   return (
     <>
       <Breadcrumb separator=">">
-        <Breadcrumb.Item><Link to="/">Home</Link></Breadcrumb.Item>
+        <Breadcrumb.Item>
+          <Link to="/">Home</Link>
+        </Breadcrumb.Item>
       </Breadcrumb>
       <CatListTopMain>
         <TopTitle> NAS</TopTitle>
-        <ButtonSection>
-          <CreatePostBtn onClick={goCreatePost}>Create a Post</CreatePostBtn>
-        </ButtonSection>
+        {sessionStorage.getItem("ACCESS_TOKEN") && (
+          <ButtonSection>
+            <CreatePostBtn onClick={goCreatePost}>Create a Post</CreatePostBtn>
+          </ButtonSection>
+        )}
       </CatListTopMain>
     </>
   );

@@ -41,7 +41,7 @@ const MainCard = ({ item, goToDetail, goToTags, goToProfile }) => {
           {item.coment_last.nickname ? (
             item.coment_last.content
           ) : (
-            <div dangerouslySetInnerHTML={{ __html: htmlCode }}></div>
+            <DescriptionImg dangerouslySetInnerHTML={{ __html: htmlCode }}></DescriptionImg>
           )}
         </Description>
         <Info>
@@ -128,6 +128,19 @@ const Description = styled.p`
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   margin-bottom: 0.4em;
+`;
+
+const DescriptionImg = styled.p`
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  img {
+    overflow: hidden;
+    max-height: 30px;
+    max-width: 30px;
+  }
 `;
 
 const Info = styled.div``;
