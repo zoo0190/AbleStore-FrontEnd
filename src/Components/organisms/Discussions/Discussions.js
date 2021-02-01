@@ -31,7 +31,7 @@ const Discussions = () => {
   };
 
   useEffect(() => {
-    fetch(`${BOARD_USER_API}/community/boards`)
+    fetch(`${BOARD_USER_API}/community/boards` || "http://localhost:3000/data/MainCardList.json")
       .then((res) => res.json())
       .then((res) => {
         setCardList(res.CONTEXT);
@@ -95,7 +95,7 @@ const Discussions = () => {
 
   return (
     <>
-      <SectionTitle />
+      <SectionTitle title="Latest Discussions" />
       <Tabs defaultActiveKey="1" onTabClick={(e) => filteringCardList(e)}>
         <TabPane tab="All" key="All">
           {totalView

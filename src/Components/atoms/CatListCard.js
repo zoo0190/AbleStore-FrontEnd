@@ -26,7 +26,7 @@ const CatListCard = ({ cardData, fromMyPage }) => {
         <LeftTop onClick={postClick}>{cardData.title}</LeftTop>
         <LeftMiddle>
           {cardData.comment_number === 0 ? (
-            <div dangerouslySetInnerHTML={{ __html: htmlCode }}></div>
+            <LeftMiddleImg dangerouslySetInnerHTML={{ __html: htmlCode }}></LeftMiddleImg>
           ) : (
             cardData.coment_last.content
           )}
@@ -63,6 +63,7 @@ export default CatListCard;
 
 const CatListCardWrapper = styled.div`
   display: flex;
+  /* width: 100%; */
   width: 998px;
   height: 8em;
 `;
@@ -85,10 +86,27 @@ const LeftTop = styled.div`
 const LeftMiddle = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
+  display: -webkit-box;
   -webkit-line-clamp: 1; /* number of lines to show */
   -webkit-box-orient: vertical;
   margin-bottom: 0.4em;
   font-size: 0.9em;
+`;
+
+const LeftMiddleImg = styled.div`
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  -webkit-box-orient: vertical;
+  margin-bottom: 0.4em;
+  font-size: 0.9em;
+
+  img {
+    overflow: hidden;
+    max-height: 30px;
+    max-width: 30px;
+  }
 `;
 const LeftBottom = styled.div`
   display: flex;

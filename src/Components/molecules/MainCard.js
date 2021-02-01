@@ -83,6 +83,7 @@ const Container = styled.div`
   align-items: center;
   padding: 15px 0;
   border-bottom: 1px solid #d6dfe6;
+  width: 998px;
 `;
 
 const IconWrapper = styled.div`
@@ -121,15 +122,12 @@ const Title = styled.a`
 `;
 
 const Description = styled.p`
-  margin-bottom: 10px;
-  max-height: 38px;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-height: 1.3em;
-  font-weight: 400;
-  color: #4c5861;
-  width: 998px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  margin-bottom: 0.4em;
 `;
 
 const Info = styled.div``;
