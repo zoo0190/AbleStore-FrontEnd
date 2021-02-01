@@ -2,9 +2,9 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { BOARD_USER_API } from "../../Enum";
+
 function CommentWrite({ boardId, categoryId, setRefreshComment }) {
   const TOKEN = sessionStorage.getItem("ACCESS_TOKEN");
-
   const [commentValue, setCommentValue] = useState("");
 
   const handleClick = (event) => {
@@ -18,7 +18,7 @@ function CommentWrite({ boardId, categoryId, setRefreshComment }) {
       content: commentValue,
     };
 
-    fetch(`http://172.30.1.37:8000/community/boards/${boardId}/comments`, {
+    fetch(`${BOARD_USER_API}/community/boards/${boardId}/comments`, {
       headers: {
         Authorization: TOKEN,
       },
@@ -27,6 +27,11 @@ function CommentWrite({ boardId, categoryId, setRefreshComment }) {
     })
       .then((res) => res.json())
       .then((res) => setRefreshComment(res));
+  };
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onSubmit(e);
+    }
   };
 
   return (
@@ -40,8 +45,9 @@ function CommentWrite({ boardId, categoryId, setRefreshComment }) {
           onChange={handleClick}
           value={commentValue}
           placeholder="코멘트를 작성해 주세요"
+          onKeyPress={onKeyPress}
         ></textarea>
-        <button style={{ width: "20%", height: "52px" }} onClick={onSubmit}>
+        <button style={{ width: "20%", height: "52px", borderRadius: "5px" }} onClick={onSubmit}>
           Submit
         </button>
       </form>

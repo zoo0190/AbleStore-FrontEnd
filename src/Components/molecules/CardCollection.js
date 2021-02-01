@@ -7,7 +7,7 @@ const CardCollection = ({ categoryData, fromMyPage }) => {
     <>
       <CardCollectionMain>
         {categoryData.map((el, id) => {
-          return <CatListCard key={id} fromMyPage={fromMyPage} cardData={el}/>;
+          return <CatListCard key={id} fromMyPage={fromMyPage} cardData={el} />;
         })}
       </CardCollectionMain>
     </>

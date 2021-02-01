@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useCallback, useState } from "react";
+import { useWindowScroll } from "react-use";
 import View from "./View";
 import CommentView from "./CommentView";
 import styled from "styled-components";
@@ -16,6 +17,14 @@ function BoardDetail() {
   const [refreshLike, setRefreshLike] = useState("");
   const [refreshComment, setRefreshComment] = useState("");
 
+  const { y } = useWindowScroll();
+  const scrollTop = () => window.scrollTo({ top: 0 });
+
+  useEffect(() => {
+    if (y > 100) {
+      scrollTop();
+    }
+  }, [boardId]);
   const getUserData = async () => {
     const result = await axios
       .get(`${BOARD_USER_API}/community/categories/${categoryId}/boards/${boardId}`)
@@ -30,18 +39,11 @@ function BoardDetail() {
   };
 
   const getUserView = async () => {
-    const result = await axios
-      .get(`${BOARD_USER_API}/community/categories/${categoryId}/boards/${boardId}/hits`)
-      .then((res) => {
-        if (res) {
-        } else {
-          alert("작성자 정보를 가져오길 실패했습니다");
-        }
-      });
+    const result = await axios.get(`${BOARD_USER_API}/community/categories/${categoryId}/boards/${boardId}/hits`);
   };
 
   const getUserCommentData = async () => {
-    const result = await axios.get(`http://172.30.1.37:8000/community/boards/${boardId}/comments`);
+    const result = await axios.get(`${BOARD_USER_API}/community/boards/${boardId}/comments`);
     setCommentUserData(result.data.CONTEXT);
   };
 
@@ -79,6 +81,7 @@ function BoardDetail() {
           categoryId={categoryId}
           setRefreshComment={setRefreshComment}
           boardId={boardId}
+          userData={userData}
           commentUserData={commentUserData}
         />
       </DetailContainer>

@@ -1,19 +1,44 @@
-import React, { useState, useEffect } from "react";
-import CKEditor from "ckeditor4-react";
-import styled from "styled-components";
+import React, { useRef } from "react";
+import ReactQuill, { Quill } from "react-quill";
+import "react-quill/dist/quill.core.css";
+import "react-quill/dist/quill.snow.css";
+import ImageResize from "quill-image-resize-module-react";
+import "./Board.css";
 
-const CategoryBoard = ({ setInputData }) => {
-  const onChange = (e) => {
-    setInputData(e.editor.getData());
+Quill.register("modules/imageResize", ImageResize);
+
+const editorConfig = {
+  toolbar: {
+    container: [
+      [{ header: [1, 2, 3, 4, 5, 6, false] }, { size: [] }, { font: [] }],
+      [{ align: [false, "center", "right"] }],
+      [{ color: [] }, { background: [] }],
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["link", "image", "video"],
+      ["code-block"],
+      ["clean"],
+    ],
+  },
+  imageResize: {
+    modules: ["Resize", "DisplaySize"],
+    displaySize: true,
+  },
+};
+
+const CategoryBoard = ({ setInputData, inputData }) => {
+  const editorRef = useRef();
+
+  const handleOnChange = () => {
+    const html = editorRef.current.editor.root.innerHTML;
+    setInputData(html);
   };
 
   return (
     <>
-      <CKEditor onChange={onChange} />
+      <ReactQuill ref={editorRef} modules={editorConfig} theme="snow" value={inputData} onChange={handleOnChange} />
     </>
   );
 };
 
 export default CategoryBoard;
-
-const EditorBoard = styled.div``;
