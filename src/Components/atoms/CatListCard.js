@@ -87,7 +87,7 @@ const LeftMiddle = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 1; /* number of lines to show */
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   margin-bottom: 0.4em;
   font-size: 0.9em;
@@ -153,13 +153,14 @@ const CardRight = styled.div`
 `;
 
 const RightProfile = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 35%;
+  height: 35%;
   background: lightgrey;
-  margin: 0.2em 0;
-  padding: 0.5em 0.85em;
-  font-size: 1.2em;
+  font-size: 1.1em;
   font-weight: 600;
   color: white;
   cursor: pointer;
