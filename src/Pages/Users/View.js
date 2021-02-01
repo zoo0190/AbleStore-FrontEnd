@@ -163,6 +163,7 @@ function View({ userData, commentUserData, boardId, categoryId, likeData, setRef
 export default View;
 
 const ViewContainer = styled.div`
+  margin-bottom: 100px;
 `;
 const Header = styled.header`
   margin-bottom: 20px;
