@@ -3,7 +3,7 @@ import { Comment, Avatar, Button, Input, Menu, Dropdown, Modal, Tag } from "antd
 import axios from "axios";
 import styled from "styled-components";
 import { DashOutlined } from "@ant-design/icons";
-import { SOLUTION_API, BOARD_USER_API, REPLY_API } from "../../Enum";
+import { SOLUTION_API, BOARD_USER_API, instance } from "../../Enum";
 import { useHistory, useParams } from "react-router-dom";
 
 function SingleComment({ comment, boardId, setRefreshComment, categoryId, userData }) {
@@ -17,42 +17,35 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId, userDa
   const [solution, setSolution] = useState(true);
   const history = useHistory();
 
-  const instance = axios.create({
-    baseURL: `${REPLY_API}`,
-    headers: {
-      Authorization: `${TOKEN}`,
-    },
-  });
-
   const onSubmit = async (event) => {
     event.preventDefault();
     setCommentValue("");
     const commentData = {
       content: commentVaule,
     };
-
-    fetch(`${REPLY_API}/${boardId}/comments/${comment.id}/comments`, {
-      headers: {
-        Authorization: TOKEN,
-      },
-      method: "POST",
-      body: JSON.stringify(commentData),
-    })
-      .then((res) => res.json())
-      .then((res) => setRefreshComment(res));
+    await instance.post(`${boardId}/comments/${comment.id}/comments`, commentData).then((result) => {
+      setRefreshComment(result);
+    });
+    // fetch(`${REPLY_API}/${boardId}/comments/${comment.id}/comments`, {
+    //   headers: {
+    //     Authorization: TOKEN,
+    //   },
+    //   method: "POST",
+    //   body: JSON.stringify(commentData),
+    // })
+    //   .then((res) => res.json())
+    //   .then((res) => setRefreshComment(res));
   };
 
   const onHadleChange = useCallback(
     (event) => {
       setCommentValue(event.currentTarget.value);
-      console.log("onHandleChange");
     },
     [commentVaule],
   );
 
   const onClickReplyOpen = () => {
     setOpenReply(!OpenReply);
-    console.log("onClick");
   };
 
   const actions = [
@@ -69,38 +62,39 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId, userDa
 
   const handleOk = async () => {
     setIsModalVisible(false);
-    console.log("handleok");
 
-    const commentId = {
-      comment_id: comment.id,
-    };
-    fetch(`${BOARD_USER_API}/community/boards/${boardId}/comments`, {
-      headers: {
-        Authorization: TOKEN,
-      },
-      method: "DELETE",
-      body: JSON.stringify(commentId),
-    })
-      .then((res) => res.json())
+    await instance
+      .delete(`${boardId}/comments`, {
+        data: { comment_id: comment.id },
+      })
       .then((res) => {
-        if (res) {
-          setRefreshComment(res);
-          history.push(`/boardDetail/${categoryId}/${boardId}`);
-        }
+        setRefreshComment(res);
       });
+
+    // fetch(`${BOARD_USER_API}/community/boards/${boardId}/comments`, {
+    //   headers: {
+    //     Authorization: TOKEN,
+    //   },
+    //   method: "DELETE",
+    //   body: JSON.stringify(commentId),
+    // })
+    //   .then((res) => res.json())
+    //   .then((res) => {
+    //     if (res) {
+    //       setRefreshComment(res);
+    //       history.push(`/boardDetail/${categoryId}/${boardId}`);
+    //     }
+    //   });
   };
 
   const showModal = () => {
     setIsModalVisible(true);
-    console.log("showModal");
   };
 
   const handleCancel = () => {
-    console.log("handleCancel");
     setIsModalVisible(false);
   };
 
-  console.log("hi");
   const menu = () => {
     return (
       <Menu>
@@ -132,20 +126,24 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId, userDa
     setCheckedSolution(true);
 
     if (+e.target.id === +comment.id) {
-      fetch(`${SOLUTION_API}/${boardId}/comments/${comment.id}`, {
-        headers: {
-          Authorization: TOKEN,
-        },
-        method: "POST",
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          setRefreshComment(res);
-        });
-    } else {
-      console.log("end");
+      const result = await instance
+        .post(`${boardId}/comments/${comment.id}`)
+        .then((result) => setRefreshComment(result));
+
+      //   fetch(`${SOLUTION_API}/${boardId}/comments/${comment.id}`, {
+      //     headers: {
+      //       Authorization: TOKEN,
+      //     },
+      //     method: "POST",
+      //   })
+      //     .then((res) => res.json())
+      //     .then((res) => {
+      //       setRefreshComment(res);
+      //     });
+      // } else {
+      //   console.log("end");
+      // }
     }
-    console.log("changeChecke");
   };
 
   const onKeyPress = (e) => {

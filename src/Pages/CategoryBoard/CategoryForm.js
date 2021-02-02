@@ -7,6 +7,7 @@ import { BOARD_USER_API } from "../../Enum";
 import { useHistory } from "react-router-dom";
 
 const API = `${BOARD_USER_API}/community/categories/1/boards`;
+
 const { Option } = Select;
 const layout = {
   labelCol: {
@@ -30,14 +31,20 @@ function CategoryForm() {
   const [topicData, setTopicData] = useState([]);
   const [inputData, setInputData] = useState("");
   const history = useHistory();
+
   useEffect(() => {
-    fetch(`${window.location.origin}/data/postData.json`)
-      .then((res) => res.json())
-      .then((res) => {
-        const { topic, tags } = res.data;
-        setTagData(tags.items);
-        setTopicData(topic.items);
-      });
+    axios.get(`${window.location.origin}/data/postData.json`).then((res) => {
+      const { topic, tags } = res.data.data;
+      setTagData(tags.items);
+      setTopicData(topic.items);
+    });
+    // fetch(`${window.location.origin}/data/postData.json`)
+    //   .then((res) => res.json())
+    //   .then((res) => {
+    //     const { topic, tags } = res.data;
+    //     setTagData(tags.items);
+    //     setTopicData(topic.items);
+    //   });
   }, []);
 
   const onFinish = (values) => {
@@ -50,27 +57,46 @@ function CategoryForm() {
     //   Tags: values.Tags.join(","),
     // };
     // console.log(Data);
-
     const requestOptions = {
-      method: "POST",
-      headers: {
-        Authorization: TOKEN,
-      },
-      body: JSON.stringify({
-        Topic: values.Topic,
-        Title: values.Title,
-        Content: inputData,
-        Image: "",
-        Tags: values.Tags.join(","),
-      }),
+      Topic: values.Topic,
+      Title: values.Title,
+      Content: inputData,
+      Image: "",
+      Tags: values.Tags.join(","),
     };
-    fetch(API, requestOptions)
-      .then((res) => res.json())
+
+    axios
+      .post(API, requestOptions, {
+        headers: {
+          Authorization: TOKEN,
+        },
+      })
       .then((res) => {
         if (res) {
           history.push("/forum/1");
         }
       });
+    // const requestOptions = {
+    //   method: "POST",
+    //   headers: {
+    //     Authorization: TOKEN,
+    //   },
+    //   body: JSON.stringify({
+    //     Topic: values.Topic,
+    //     Title: values.Title,
+    //     Content: inputData,
+    //     Image: "",
+    //     Tags: values.Tags.join(","),
+    //   }),
+    // };
+
+    // fetch(API, requestOptions)
+    //   .then((res) => res.json())
+    //   .then((res) => {
+    //     if (res) {
+    //       history.push("/forum/1");
+    //     }
+    //   });
   };
 
   const onBack = () => {

@@ -1,40 +1,39 @@
 import React, { useState } from "react";
 import { Tooltip } from "antd";
 import { LikeOutlined } from "@ant-design/icons";
-import { LIKE_API } from "../../Enum";
+import { instance } from "../../Enum";
 
 function LikeDisLike({ likeData, boardId, setRefreshLike }) {
-  const [likeAction, setLikeAction] = useState("");
-  const TOKEN = sessionStorage.getItem("ACCESS_TOKEN");
+  const onLike = async () => {
+    await instance.post(`${boardId}/likes`).then((res) => {
+      if ((res.data.MESSAGE = "BOARD_LIKE_CREATE")) {
+        setRefreshLike(res);
+      }
+    });
 
-  const onLike = () => {
-    fetch(`${LIKE_API}/community/boards/${boardId}/likes`, {
-      headers: {
-        Authorization: TOKEN,
-      },
-      method: "POST",
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.MESSAGE === "BOARD_LIKE_CREATE") {
-          setLikeAction("liked");
-          setRefreshLike(res);
-        } else {
-          setRefreshLike(res);
-          setLikeAction("");
-        }
-      });
-
-    fetch("")
-      .then((res) => res.json())
-      .then((res) => {});
+    // fetch(`${LIKE_API}/community/boards/${boardId}/likes`, {
+    //   headers: {
+    //     Authorization: TOKEN,
+    //   },
+    //   method: "POST",
+    // })
+    //   .then((res) => res.json())
+    //   .then((res) => {
+    //     if (res.MESSAGE === "BOARD_LIKE_CREATE") {
+    //       setLikeAction("liked");
+    //       setRefreshLike(res);
+    //     } else {
+    //       setRefreshLike(res);
+    //       setLikeAction("");
+    //     }
+    //   });
   };
 
   return (
     <div>
       <span key="comment-basic-like">
         <Tooltip title="Like">
-          <LikeOutlined onClick={onLike} style={{ color: likeAction === "liked" ? "red" : "" }} />
+          <LikeOutlined onClick={onLike} style={{ color: likeData > 0 ? "red" : "black" }} />
         </Tooltip>
         <span style={{ paddingLeft: "8px", cursor: "auto" }}>{likeData}</span>
       </span>

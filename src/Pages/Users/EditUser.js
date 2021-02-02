@@ -7,7 +7,6 @@ import axios from "axios";
 import { BOARD_USER_API } from "../../Enum";
 import HeaderNav from "../../Components/Organisms/Header/Header";
 
-const formRef = React.createRef();
 const { Option } = Select;
 const layout = {
   labelCol: {
@@ -40,13 +39,11 @@ function EditUser() {
   const history = useHistory();
 
   useEffect(() => {
-    fetch(`${window.location.origin}/data/postData.json`)
-      .then((res) => res.json())
-      .then((res) => {
-        const { topic, tags } = res.data;
-        setTagData(tags.items);
-        setTopicData(topic.items);
-      });
+    axios.get(`${window.location.origin}/data/postData.json`).then((res) => {
+      const { topic, tags } = res.data.data;
+      setTagData(tags.items);
+      setTopicData(topic.items);
+    });
   }, []);
 
   const loadUser = async () => {
@@ -131,7 +128,7 @@ function EditUser() {
                   <Option value={topic} selected={topic} disabled hidden>
                     {topic}
                   </Option>
-                  <Option name={user.topic} defaultValue={user.topic} key={e.id} value={e.text}>
+                  <Option name={user.topic} key={e.id} value={e.text}>
                     <Tag>{e.text}</Tag>
                   </Option>
                 </>
@@ -143,7 +140,7 @@ function EditUser() {
             <Input type="text" defaultValue={title} />
           </Form.Item> */}
 
-          {formWrapper("Title", <Input name={title} type="text" value={title} defaultValue={title} />)}
+          {formWrapper("Title", <Input name={title} type="text" value={title} />)}
 
           {formWrapper(
             "Tags",

@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const COUNTRY = {
   country: [
     {
@@ -27,7 +29,7 @@ export const COUNTRY = {
   ],
 };
 
-var LOCAL_HOST = "http://54.180.99.152:8000";
+const LOCAL_HOST = "http://54.180.99.152:8000";
 
 export const SIGN_UP_API = `${LOCAL_HOST}/user/signup`;
 
@@ -39,10 +41,15 @@ export const MY_PAGE = `${LOCAL_HOST}/community/users/`;
 
 export const SOLUTION_API = `${LOCAL_HOST}/community/boards`;
 
-export const REPLY_API = `${LOCAL_HOST}/community/boards`;
+export const BASE_URL = `${LOCAL_HOST}/community/boards`;
 
 export const BOARD_USER_API = `${LOCAL_HOST}`;
 
-export const LIKE_API = `${LOCAL_HOST}`;
-
 // export const TOKEN = sessionStorage.getItem("ACCESS_TOKEN")
+
+export const instance = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    Authorization: sessionStorage.getItem("ACCESS_TOKEN"),
+  },
+});

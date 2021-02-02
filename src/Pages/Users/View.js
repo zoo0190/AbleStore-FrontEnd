@@ -113,7 +113,6 @@ function View({ userData, commentUserData, boardId, categoryId, likeData, setRef
                   color: "#4c5861",
                   backgroundColor: "#fff",
                   border: "1px solid #4c5861",
-                  verticalAlign: "middle",
                   display: "inline-block",
                 }}
               >
@@ -123,6 +122,7 @@ function View({ userData, commentUserData, boardId, categoryId, likeData, setRef
           }
         })}
         {result[0]?.solution ? <CheckableTag checked={true}>Solution</CheckableTag> : ""}
+
         <TitleContainer>
           <Title>{title}</Title>
           <LikeDisLike
