@@ -1,32 +1,30 @@
 import React, { useState } from "react";
 import { Tooltip } from "antd";
 import { LikeOutlined } from "@ant-design/icons";
-import { instance } from "../../Enum";
+import { instance, LOCAL_HOST } from "../../Enum";
+import axios from "axios";
 
 function LikeDisLike({ likeData, boardId, setRefreshLike }) {
+  const [like, setLikeAction] = useState(0);
+  const TOKEN = sessionStorage.getItem("ACCESS_TOKEN");
+
   const onLike = async () => {
-    await instance.post(`${boardId}/likes`).then((res) => {
-      if ((res.data.MESSAGE = "BOARD_LIKE_CREATE")) {
+    await axios({
+      url: `${LOCAL_HOST}/community/boards/${boardId}/likes`,
+      method: "post",
+      headers: {
+        Authorization: TOKEN,
+      },
+    }).then((res) => {
+      if (res.data.MESSAGE === "BOARD_LIKE_CREATE") {
+        console.log(res);
+        setLikeAction("liked");
+        setRefreshLike(res);
+      } else {
+        setLikeAction("");
         setRefreshLike(res);
       }
     });
-
-    // fetch(`${LIKE_API}/community/boards/${boardId}/likes`, {
-    //   headers: {
-    //     Authorization: TOKEN,
-    //   },
-    //   method: "POST",
-    // })
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     if (res.MESSAGE === "BOARD_LIKE_CREATE") {
-    //       setLikeAction("liked");
-    //       setRefreshLike(res);
-    //     } else {
-    //       setRefreshLike(res);
-    //       setLikeAction("");
-    //     }
-    //   });
   };
 
   return (

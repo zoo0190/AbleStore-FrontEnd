@@ -24,7 +24,7 @@ function CommentReply({ refresh, comment, categoryId, boardId, parentCommentId, 
     commentUserData.map((comment, index) => (
       <>
         {comment.reply === parentCommentId && (
-          <div style={{ width: "80%", marginLeft: "40px" }}>
+          <div style={{ width: "8e0%", marginLeft: "40px" }}>
             <SingleComment
               commentId={comment.id}
               boardId={boardId}

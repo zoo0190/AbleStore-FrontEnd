@@ -29,7 +29,7 @@ export const COUNTRY = {
   ],
 };
 
-const LOCAL_HOST = "http://54.180.99.152:8000";
+export const LOCAL_HOST = "http://54.180.99.152:8000";
 
 export const SIGN_UP_API = `${LOCAL_HOST}/user/signup`;
 
@@ -45,11 +45,13 @@ export const BASE_URL = `${LOCAL_HOST}/community/boards`;
 
 export const BOARD_USER_API = `${LOCAL_HOST}`;
 
-// export const TOKEN = sessionStorage.getItem("ACCESS_TOKEN")
+export const TOKEN = sessionStorage.getItem("ACCESS_TOKEN");
 
 export const instance = axios.create({
   baseURL: BASE_URL,
   headers: {
-    Authorization: sessionStorage.getItem("ACCESS_TOKEN"),
+    Authorization: TOKEN,
   },
 });
+
+console.log(TOKEN);

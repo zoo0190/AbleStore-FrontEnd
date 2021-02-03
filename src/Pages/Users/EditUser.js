@@ -89,11 +89,6 @@ function EditUser() {
     },
   ];
 
-  useEffect(() => {
-    formRef.current.setFieldsValue({
-      username: "kim",
-    });
-  }, []);
   const { title, content, topic, tags } = user;
 
   const formWrapper = (text, child) => (
@@ -135,10 +130,6 @@ function EditUser() {
               ))}
             </Select>,
           )}
-
-          {/* <Form.Item name={title} label="Title" rules={options}>
-            <Input type="text" defaultValue={title} />
-          </Form.Item> */}
 
           {formWrapper("Title", <Input name={title} type="text" value={title} />)}
 

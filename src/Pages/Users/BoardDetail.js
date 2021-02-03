@@ -18,9 +18,9 @@ function BoardDetail() {
   const [refreshComment, setRefreshComment] = useState("");
 
   const { y } = useWindowScroll();
-  const scrollTop = () => window.scrollTo({ top: 100 });
-
   useEffect(() => {
+    const scrollTop = () => window.scrollTo({ top: 100 });
+
     if (y > 100) {
       scrollTop();
     }

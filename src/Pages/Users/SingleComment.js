@@ -26,15 +26,6 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId, userDa
     await instance.post(`${boardId}/comments/${comment.id}/comments`, commentData).then((result) => {
       setRefreshComment(result);
     });
-    // fetch(`${REPLY_API}/${boardId}/comments/${comment.id}/comments`, {
-    //   headers: {
-    //     Authorization: TOKEN,
-    //   },
-    //   method: "POST",
-    //   body: JSON.stringify(commentData),
-    // })
-    //   .then((res) => res.json())
-    //   .then((res) => setRefreshComment(res));
   };
 
   const onHadleChange = useCallback(
@@ -70,21 +61,6 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId, userDa
       .then((res) => {
         setRefreshComment(res);
       });
-
-    // fetch(`${BOARD_USER_API}/community/boards/${boardId}/comments`, {
-    //   headers: {
-    //     Authorization: TOKEN,
-    //   },
-    //   method: "DELETE",
-    //   body: JSON.stringify(commentId),
-    // })
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     if (res) {
-    //       setRefreshComment(res);
-    //       history.push(`/boardDetail/${categoryId}/${boardId}`);
-    //     }
-    //   });
   };
 
   const showModal = () => {
@@ -129,20 +105,6 @@ function SingleComment({ comment, boardId, setRefreshComment, categoryId, userDa
       const result = await instance
         .post(`${boardId}/comments/${comment.id}`)
         .then((result) => setRefreshComment(result));
-
-      //   fetch(`${SOLUTION_API}/${boardId}/comments/${comment.id}`, {
-      //     headers: {
-      //       Authorization: TOKEN,
-      //     },
-      //     method: "POST",
-      //   })
-      //     .then((res) => res.json())
-      //     .then((res) => {
-      //       setRefreshComment(res);
-      //     });
-      // } else {
-      //   console.log("end");
-      // }
     }
   };
 
